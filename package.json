@@ -8,18 +8,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Hitman666/MEAN_MVC_3rdTutorial.git"
+    "url": "https://github.com/acmh/gymquery.git"
   },
   "keywords": [
-    "MEAN",
-    "MVC"
+    "SQL",
+    "MVC",
+    "NODE"
   ],
-  "author": "Nikola Brežnjak <nikola.breznjak@gmail.com> (http://www.nikola-breznjak.com/)",
+  "author": "Artur Montenegro <acmh@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Hitman666/MEAN_MVC_3rdTutorial/issues"
   },
-  "homepage": "https://github.com/Hitman666/MEAN_MVC_3rdTutorial",
+  "homepage": "",
   "dependencies": {
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
