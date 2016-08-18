@@ -1,0 +1,42 @@
+{
+  "name": "Gym Query",
+  "version": "1.0.0",
+  "description": "SQL Learn Plataform",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hitman666/MEAN_MVC_3rdTutorial.git"
+  },
+  "keywords": [
+    "MEAN",
+    "MVC"
+  ],
+  "author": "Nikola Brežnjak <nikola.breznjak@gmail.com> (http://www.nikola-breznjak.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hitman666/MEAN_MVC_3rdTutorial/issues"
+  },
+  "homepage": "https://github.com/Hitman666/MEAN_MVC_3rdTutorial",
+  "dependencies": {
+    "body-parser": "~1.15.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.13.4",
+    "jade": "~1.11.0",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0",
+    "mongoose": "~4.5.9",
+    "passport": "~0.3.2",
+    "connect-flash": "~0.1.1",
+    "express-session": "~1.14.0",
+    "ejs": "~2.5.1",
+    "passport-local": "~1.0.0",
+    "crypto": "0.0.3",
+    "passport-facebook": "^1.0.3",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.2"
+  }
+}
