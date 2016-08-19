@@ -25,6 +25,6 @@ Look at TODO.md
 
 ## How to contribute?
 
-* Fork the repo, propose some features (explain why you want to add this feature, give some context), submit via pull request.
+* Clone the repo, propose some features (explain why you want to add this feature, give some context), submit via pull request.
 
 * Take one task in TODO.md
