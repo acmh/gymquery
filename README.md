@@ -3,9 +3,9 @@ GYM QUERY
 
 ## Motivation and Overview
 
-My first contact with SQL was boring and pragmatic, too many slides and lectures and no practice stuff, these can become barriers to learn anything. So, to bring balance to the world and to conciliate theory and pratical stuff this platform will be developed.
+My first contact with SQL was boring and pragmatic, too many slides and lectures and no practice stuff, these can become barriers to learn anything. So, to bring balance to the world and to conciliate theory and practical knowledge this platform will be developed.
 
-Gym Query is web-based platform, where people can create questions to be answered. A question is a real or imaginary scenario where you describe it. And then you give SQL Scripts (scripts to create tables and insert data into them) to people query them. Beyond that, the platform will make use of gamefication techiniques to make the "learning path" funny and dynamic.
+Gym Query is web-based platform, where people can create questions to be answered. A question is a real or imaginary scenario where you describe it. And then you give SQL Scripts (scripts to create tables and insert data into them) to people query them. Beyond that, the platform will make use of gamefication techniques to make the "learning path" funny and dynamic.
 
 This is also my undergraduate final project, so any help or sugestion are welcome and will be recognized in my course conclusion paper.
 
