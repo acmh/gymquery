@@ -1,7 +1,8 @@
 {
-  "name": "Gym Query",
+  "name": "Gym-Query",
   "version": "1.0.0",
   "description": "SQL Learn Plataform",
+  "private": true,
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
