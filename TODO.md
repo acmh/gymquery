@@ -1,6 +1,6 @@
 TODO
 =========================
-This file describes activities not actually implemented. Pick one, and be happy. 
+This file describes features not actually implemented. Pick one, and be happy. 
 
 
 ##Backend
