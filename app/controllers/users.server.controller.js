@@ -1,6 +1,8 @@
 var User = require('mongoose').model('User'),
 	passport = require('passport');
 
+
+
 var getErrorMessage = function(err) {
 	var message = '';
 	if (err.code) {
@@ -57,12 +59,12 @@ exports.register = function(req, res, next) {
 				var message = getErrorMessage(err);
 				req.flash('error', message);
 				return res.redirect('/register');
-			}	
+			}
 
 			req.login(user, function(err) {
-				if (err) 
+				if (err)
 					return next(err);
-				
+
 				return res.redirect('/');
 			});
 		});
@@ -114,7 +116,7 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 
 
 
-exports.create = function(req, res, next) {	
+exports.create = function(req, res, next) {
 	var user = new User(req.body);
 	user.save(function(err) {
 		if (err) {
@@ -144,7 +146,7 @@ exports.read = function(req, res) {
 exports.userByID = function(req, res, next, id) {
 	User.findOne({
 			_id: id
-		}, 
+		},
 		function(err, user) {
 			if (err) {
 				return next(err);

@@ -1,6 +1,7 @@
 var users = require('../../app/controllers/users.server.controller'),
 	passport = require('passport');
 
+
 module.exports = function(app) {
 	app.route('/users').post(users.create).get(users.list);
 
@@ -21,24 +22,4 @@ module.exports = function(app) {
 		}));
 
 	app.get('/logout', users.logout);
-
-	app.get('/oauth/facebook', passport.authenticate('facebook', {
-		failureRedirect: '/login',
-		scope:['email']
-	}));
-
-	app.get('/oauth/facebook/callback', passport.authenticate('facebook', {
-		failureRedirect: '/login',
-		successRedirect: '/',
-		scope:['email']
-	}));
-
-	app.get('/oauth/twitter', passport.authenticate('twitter', {
-		failureRedirect: '/login'
-	}));
-
-	app.get('/oauth/twitter/callback', passport.authenticate('twitter', {
-		failureRedirect: '/login',
-		successRedirect: '/'
-	}));
 };

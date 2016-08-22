@@ -8,13 +8,14 @@
     <h1><%= title %></h1>
 
     <% if ( user ) { %>
-		<h2>Hello <%=user%> </h2>
-		<a href="/logout">Logout</a>
-	<% } else { %>
-		<a href="/register">Register</a>
-		<a href="/login">Login</a>
-	<% } %>
+  		<h2>Hello <%=user%> </h2>
+  		<a href="/logout">Logout</a>
+      <a href="/questions">Create a Question</a>
+    <% } else { %>
+  		<a href="/register">Register</a>
+  		<a href="/login">Login</a>
+	  <% } %>
 
-    <img src="img/logo.jpg" alt="Hack Hands logo">
+
 </body>
 </html>
