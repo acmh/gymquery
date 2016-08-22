@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+</head>
+
+<body>
+    <h1><%= title %></h1>
+
+    <% if ( user ) { %>
+  		<h2>Hello <%=user%> </h2>
+  		<a href="/logout">Logout</a>
+      <a href="/questions">Create a Question</a>
+    <% } else { %>
+  		<a href="/register">Register</a>
+  		<a href="/login">Login</a>
+	  <% } %>
+
+
+</body>
+</html>

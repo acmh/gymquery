@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+</head>
+
+<body>
+    <h1><%= title %></h1>
+
+    <% if ( user ) { %>
+  		<h2>Hello <%=user%> </h2>
+      <form action="<%= action %>" method="post">
+        <% if (fields.length) { %>
+           <% fields.forEach(function(field){ %>
+               <label><%= field.name %></label>
+               <input type="<%= field.type %>" name="<%= field.name %>" <% if (field.property) { %> <%= field.property %> <% } %> >
+           <% }) %>
+        <% } %>
+
+        <button type="submit"><%= buttonName  %></button> <!--Title for button is same as that of the page-->
+    </form>
+	  <% } else { %>
+  		<a href="/register">Register</a>
+  		<a href="/login">Login</a>
+	  <% } %>
+
+
+</body>
+</html>
