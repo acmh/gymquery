@@ -1,4 +1,4 @@
-var question = require('../../app/controllers/question.server.controller'),
+var question = require('../../api/controllers/question.server.controller'),
     passport = require('passport');
 
 

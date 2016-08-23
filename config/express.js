@@ -20,16 +20,16 @@ module.exports = function() {
 		secret: 'OurSuperSecretCookieSecret'
 	}));
 
-	app.set('views', './app/views');
+	app.set('views', './api/views');
 	app.set('view engine', 'ejs');
 
 	app.use(flash());
 	app.use(passport.initialize());
 	app.use(passport.session());
 
-	require('../app/routes/index.server.routes.js')(app);
-	require('../app/routes/users.server.routes.js')(app);
-	require('../app/routes/question.server.routes.js')(app);
+	require('../api/routes/index.server.routes.js')(app);
+	require('../api/routes/users.server.routes.js')(app);
+	require('../api/routes/question.server.routes.js')(app);
 
 	app.use(express.static('./public'));
 

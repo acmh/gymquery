@@ -1,8 +1,6 @@
 var User = require('mongoose').model('User'),
 	passport = require('passport');
 
-
-
 var getErrorMessage = function(err) {
 	var message = '';
 	if (err.code) {

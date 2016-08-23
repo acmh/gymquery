@@ -1,4 +1,4 @@
-var users = require('../../app/controllers/users.server.controller'),
+var users = require('../../api/controllers/users.server.controller'),
 	passport = require('passport');
 
 
