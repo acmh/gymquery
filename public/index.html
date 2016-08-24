@@ -1,26 +1,31 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>BIIIIIRL</title>
-  </head>
-  <body bgcolor=white>
+	<head>
+		<base href="/">
 
-    <table border="0" cellpadding="10">
-      <tr>
-        <td>
-          <img src="images/springsource.png">
-        </td>
-        <td>
-          <h1>Sample "Hello, World" Application</h1>
-        </td>
-      </tr>
-    </table>
+		<meta charset="utf-8">
+		<title>GymQuery</title>
 
-    <p>This is the home page for the HelloWorld Web application. </p>
-    <p>To prove that they work, you can execute either of the following links:
-    <ul>
-      <li>To a <a href="hello.jsp">JSP page</a>.
-      <li>To a <a href="hello">servlet</a>.
-    </ul>
+		<!-- Angular -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js" charset="utf-8"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js" charset="utf-8"></script>
 
-  </body>
+		<!-- Bootstrap -->
+ 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+		<link href="/css/main.css" rel="stylesheet">
+
+		<!-- Angular permission -->
+		<script src="js/permission/angular-permission.js" charset="utf-8"></script>
+		<script src="js/permission/angular-permission-ng.js" charset="utf-8"></script>
+
+		<!-- App -->
+		<script src="app/app.js" charset="utf-8"></script>
+		<script src="app/router.js" charset="utf-8"></script>
+		<script src="app/main.service.js" charset="utf-8"></script>
+		<script src="app/main.controller.js" charset="utf-8"></script>
+	</head>
+
+	<body ng-app="gymqueryApp">
+		<div ng-view></div>
+	</body>
 </html>
