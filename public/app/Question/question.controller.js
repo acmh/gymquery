@@ -5,7 +5,7 @@
         .module("gymqueryApp")
         .controller("questionController", questionCtrl);
 
-    questionCtrl.$inject = ['questionService'];
+    questionCtrl.$inject = ["questionService"];
 
     function questionCtrl (questionService) {
         var vm = this;
@@ -16,5 +16,17 @@
         /* Click Handlers */
         vm.addQuestion = questionService.addQuestion;
         vm.removeQuestion = questionService.removeQuestion;
+        vm.submitQuestion = submitQuestion;
+
+        ////////////////////////////////
+
+        function submitQuestion() {
+            questionService.submitQuestion(vm.title, vm.creation, vm.population);
+            /*
+            vm.title = '';
+            vm.creation = '';
+            vm.population = '';
+            */
+        };
     };
 })();

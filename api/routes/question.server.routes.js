@@ -6,5 +6,6 @@ var question = require('../../api/controllers/question.server.controller'),
 module.exports = function(app){
 
     app.route('/questions').get(question.renderQuestions);
+    app.route('/questions').post(question.createQuestion);
 
 };

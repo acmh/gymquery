@@ -5,14 +5,17 @@
         .module("gymqueryApp")
 		.factory("questionService", questionServ);
 
-	function questionServ () {
+	questionServ.$inject = ["$http"];
+
+	function questionServ ($http) {
         var service;
         var questions = [{}];
 
         service = {
             getQuestions: getQuestions,
             addQuestion : addQuestion,
-            removeQuestion : removeQuestion
+            removeQuestion : removeQuestion,
+			submitQuestion : submitQuestion
         };
 
         return service;
@@ -28,5 +31,18 @@
         function removeQuestion() {
             questions.pop();
         };
+
+		function submitQuestion(title,creation,populate) {
+			$http({
+				method: "POST",
+				url: "questions",
+				data: {
+					title: title,
+					creationScript: creation,
+					populateScript: populate,
+					questionList: questions
+				}
+			});
+		}
 	};
 })();

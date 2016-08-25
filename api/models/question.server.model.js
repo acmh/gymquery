@@ -5,8 +5,8 @@ var mongoose = require('mongoose'),
 var QuestionSchema = new Schema({
     title: String,
     creationScript: String,
-    populateScript: String
-    //questionList: [{question:String, answer: String}]
+    populateScript: String,
+    questionList: [{question:String, answer: String}]
 });
 
 //PRE MIDDLEWARE FOR QUESTION VALIDATION
