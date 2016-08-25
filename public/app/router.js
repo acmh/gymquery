@@ -7,12 +7,15 @@
 
     function route ($routeProvider, $locationProvider) {
         $routeProvider
-            .when('/', {
-                templateUrl: 'app/_mainView.html',
-                controller: 'mainController',
-                controllerAs: 'main'
+			.when('/', {
+				template: ' '
+			})
+            .when('/questions', {
+                templateUrl: 'app/Question/_question.html',
+                controller: 'questionController',
+                controllerAs: 'question'
             });
 
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
     };
 })();

@@ -1,0 +1,25 @@
+<div>
+    <div class="row central">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <h3>Add a Question</h3>
+                <form>
+                    Título : <input type="text" ng-model="question.title" required><br/>
+                    Script de criação : <textarea ng-model="question.creation" rows="2" cols="40"></textarea><br />
+                    Script de povoamento : <textarea ng-model="question.population" rows="2" cols="40"></textarea><br />
+                    <div class="panel panel-default" ng-repeat="pair in question.questions">
+                        Pergunta : <textarea ng-model="pair.question" rows="2" cols="20"></textarea>
+                        Resposta : <textarea ng-model="pair.answer" rows="2" cols="20"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary" ng-click="question.addQuestion()">+</button>
+                    <button type="button" class="btn btn-danger" ng-click="question.removeQuestion()">-</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel">
+                <h3>Questions</h3>
+            </div>
+        </div>
+    </div>
+</div>

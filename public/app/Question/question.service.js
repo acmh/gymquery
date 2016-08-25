@@ -3,9 +3,9 @@
 
 	angular
         .module("gymqueryApp")
-		.factory("mainService", mainServ);
+		.factory("questionService", questionServ);
 
-	function mainServ () {
+	function questionServ () {
         var service;
         var questions = [{}];
 

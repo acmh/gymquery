@@ -21,11 +21,21 @@
 		<!-- App -->
 		<script src="app/app.js" charset="utf-8"></script>
 		<script src="app/router.js" charset="utf-8"></script>
-		<script src="app/main.service.js" charset="utf-8"></script>
-		<script src="app/main.controller.js" charset="utf-8"></script>
+		<script src="app/Question/question.service.js" charset="utf-8"></script>
+		<script src="app/Question/question.controller.js" charset="utf-8"></script>
 	</head>
 
 	<body ng-app="gymqueryApp">
+		<!-- Navbar -->
+		<nav class="navbar navbar-default">
+		    <div class = "navbar-header">
+				<a class = "navbar-brand" href = "/#/">GymQyery</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="/#/questions">Questions</a></li>
+			</ul>
+		</nav>
+
 		<div ng-view></div>
 	</body>
 </html>
