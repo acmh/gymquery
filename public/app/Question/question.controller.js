@@ -20,7 +20,9 @@
 
         ////////////////////////////////
 
-        function submitQuestion() {
+        function submitQuestion(questionForm) {
+            if (!questionForm.$valid) { return; }
+            
             questionService.submitQuestion(vm.title, vm.creation, vm.population);
             /*
             vm.title = '';
