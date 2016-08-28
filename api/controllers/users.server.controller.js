@@ -1,7 +1,63 @@
 var User = require('mongoose').model('User'),
 	passport = require('passport');
+var jwt = require('jsonwebtoken');
 
-var getErrorMessage = function(err) {
+exports.login = function(req,res){
+	passport.authenticate('local', function(err, user, info){
+    var token;
+    //If Passport throws/catches an error
+    if (err) {
+      res.status(404).json(err);
+      return;
+    }
+    // If a user is found
+    if(user){
+      token = user.generateJwt();
+      res.status(200);
+      res.json({
+        "token" : token
+      });
+    } else {
+      // If user is not found
+    	res.status(401).json(info);
+    }
+  })(req, res);
+}
+
+exports.register = function(req, res){
+	User.findOne({email: req.body.email, password: req.body.password}, function(err, user){
+		if(err){
+			res.json({
+				type: false,
+				data: "Error ocurred: " + err
+			});
+		}else{
+			if (user) {
+				res.json({
+					type: false,
+					data: "User already exists!"
+				});
+			}else{
+				var user = new User();
+				user.name = req.body.name;
+  			user.email = req.body.email;
+
+				user.setPassword(req.body.password);
+
+				user.save(function(err) {
+    			var token;
+    			token = user.generateJwt();
+    			res.status(200);
+    			res.json({
+      			"token" : token
+    			});
+  			});
+			}
+		}
+	});
+}
+
+/*var getErrorMessage = function(err) {
 	var message = '';
 	if (err.code) {
 		switch (err.code) {
@@ -77,43 +133,6 @@ exports.logout = function(req, res) {
 	res.redirect('/');
 };
 
-exports.saveOAuthUserProfile = function(req, profile, done) {
-	User.findOne({
-			provider: profile.provider,
-			providerId: profile.providerId
-		},
-		function(err, user) {
-			if (err) {
-				return done(err);
-			}
-			else {
-				if (!user) {
-					var possibleUsername = profile.username || ((profile.email) ? profile.email.split('@')[0] : '');
-					User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
-						profile.username = availableUsername;
-						user = new User(profile);
-
-						user.save(function(err) {
-							if (err) {
-								var message = _this.getErrorMessage(err);
-								req.flash('error', message);
-								return res.redirect('/register');
-							}
-
-							return done(err, user);
-						});
-					});
-				}
-				else {
-					return done(err, user);
-				}
-			}
-		}
-	);
-};
-
-
-
 exports.create = function(req, res, next) {
 	var user = new User(req.body);
 	user.save(function(err) {
@@ -177,4 +196,4 @@ exports.delete = function(req, res, next) {
 			res.json(req.user);
 		}
 	})
-};
+};*/

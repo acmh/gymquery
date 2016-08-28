@@ -1,21 +1,48 @@
 var mongoose = require('mongoose'),
-	crypto = require('crypto'),
-	Schema = mongoose.Schema;
+		crypto = require('crypto'),
+		jwt = require('jsonwebtoken'),
+		Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
 	name: String,
-	email: String,
+	email: {
+		type: String,
+		unique: true
+	},
 	username: {
 		type: String,
 		trim: true,
 		unique: true
 	},
 	password: String,
-	provider: String,
-	providerId: String,
-	providerData: {},
+	salt: String,
+	token: String
 });
 
+UserSchema.methods.setPassword = function(password){
+  this.salt = crypto.randomBytes(16).toString('hex');
+  this.password = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+};
+
+UserSchema.methods.validPassword = function(password) {
+  var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+  return this.password === hash;
+};
+
+//Generate a token with some extra informations (like expire time)
+UserSchema.methods.generateJwt = function() {
+  var expiry = new Date();
+  expiry.setDate(expiry.getDate() + 7);
+
+  return jwt.sign({
+    _id: this._id,
+    email: this.email,
+    name: this.name,
+    exp: parseInt(expiry.getTime() / 1000),
+  }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
+};
+
+/* Execute before each user.save() call
 UserSchema.pre('save',
 	function(next) {
 		if (this.password) {
@@ -24,36 +51,6 @@ UserSchema.pre('save',
 		}
 
 		next();
-	}
-);
-
-UserSchema.methods.authenticate = function(password) {
-	var md5 = crypto.createHash('md5');
-	md5 = md5.update(password).digest('hex');
-
-	return this.password === md5;
-};
-
-UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
-	var _this = this;
-	var possibleUsername = username + (suffix || '');
-
-	_this.findOne(
-		{username: possibleUsername},
-		function(err, user) {
-			if (!err) {
-				if (!user) {
-					callback(possibleUsername);
-				}
-				else {
-					return _this.findUniqueUsername(username, (suffix || 0) + 1, callback);
-				}
-			}
-			else {
-				callback(null);
-			}
-		}
-	);
-};
+	);*/
 
 mongoose.model('User', UserSchema);

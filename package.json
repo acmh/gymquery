@@ -18,8 +18,7 @@
   ],
   "author": "Artur Montenegro <acmh@gmail.com>",
   "license": "ISC",
-  "bugs": {
-  },
+  "bugs": {},
   "homepage": "",
   "dependencies": {
     "body-parser": "~1.15.2",
@@ -34,10 +33,10 @@
     "connect-flash": "~0.1.1",
     "express-session": "~1.14.0",
     "ejs": "~2.5.1",
-    "passport-local": "~1.0.0",
+    "passport-local": "^1.0.0",
     "crypto": "0.0.3",
     "passport-facebook": "^1.0.3",
-    "passport-local": "^1.0.0",
-    "passport-twitter": "^1.0.2"
+    "passport-twitter": "^1.0.2",
+    "jsonwebtoken": "~7.1.9"
   }
 }
