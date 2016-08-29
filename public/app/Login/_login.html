@@ -1,0 +1,27 @@
+<div>
+    <div class="row central">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <h3>Login</h3>
+                <form name="loginForm">
+                    Email : <input type="email" ng-model="auth.login.email" ng-model-options="{ debounce: 1000 }" required><br />
+                    Senha : <input type="password" ng-model="auth.login.password" ng-model-options="{ debounce: 1000 }" required><br /><br />
+                    <button type="submit" class="btn btn-primary" ng-click="auth.submitLogin(loginForm)">Logar</button>
+
+                    <div class="alert alert-danger" ng-show="auth.error">{{auth.error}}</div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <h3>Registrar</h3>
+                <form name="registerForm">
+                    Nome do usuário : <input type="text" ng-model="auth.register.name" ng-model-options="{ debounce: 1000 }" required><br/>
+                    Email : <input type="email" ng-model="auth.register.email" ng-model-options="{ debounce: 1000 }" required><br />
+                    Senha : <input type="password" ng-model="auth.register.password" ng-model-options="{ debounce: 1000 }" required><br /><br />
+                    <button type="submit" class="btn btn-primary" ng-click="auth.submitRegister(registerForm)">Registrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
