@@ -2,6 +2,13 @@ var User = require('mongoose').model('User'),
 	passport = require('passport');
 var jwt = require('jsonwebtoken');
 
+exports.showprofile = function(req, res){
+	console.log('Entrou');
+	res	.json({
+		'alo':'molieres'
+	});
+}
+
 exports.login = function(req,res){
 	passport.authenticate('local', function(err, user, info){
     var token;
