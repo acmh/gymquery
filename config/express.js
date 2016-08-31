@@ -27,14 +27,7 @@ module.exports = function() {
 	app.use(passport.initialize());
 	app.use(passport.session());
 
-	//Triggered when a user try to acess a Unauthorized route
-	app.use(function (err, req, res, next) {
-  	if (err.name === 'UnauthorizedError') {
-    	res.status(401);
-    	res.json({"message" : err.name + ": " + err.message});
-  	}
-	});
-
+	require('../config/middleware.js')(app,['/profile']);
 	require('../api/routes/index.server.routes.js')(app);
 	require('../api/routes/users.server.routes.js')(app);
 	require('../api/routes/question.server.routes.js')(app);

@@ -22,7 +22,8 @@ exports.login = function(req,res){
       token = user.generateJwt();
       res.status(200);
       res.json({
-        "token" : token
+        "token" : token,
+				'username': user.username
       });
     } else {
       // If user is not found
@@ -56,7 +57,8 @@ exports.register = function(req, res){
     			token = user.generateJwt();
     			res.status(200);
     			res.json({
-      			"token" : token
+      			"token" : token,
+						"username": user.username
     			});
   			});
 			}

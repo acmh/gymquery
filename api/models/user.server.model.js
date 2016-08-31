@@ -16,7 +16,6 @@ var UserSchema = new Schema({
 	},
 	password: String,
 	salt: String,
-	token: String
 });
 
 UserSchema.methods.setPassword = function(password){
@@ -33,11 +32,11 @@ UserSchema.methods.validPassword = function(password) {
 UserSchema.methods.generateJwt = function() {
   var expiry = new Date();
   expiry.setDate(expiry.getDate() + 7);
-	
+
   return jwt.sign({
     _id: this._id,
     email: this.email,
-    name: this.name,
+    name: this.username,
     exp: parseInt(expiry.getTime() / 1000),
   }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
