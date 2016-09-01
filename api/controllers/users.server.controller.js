@@ -23,48 +23,66 @@ exports.login = function(req,res){
       res.status(200);
       res.json({
         "token" : token,
-				'username': user.username
+		'username': user.name
       });
     } else {
-      // If user is not found
+      	// If user is not found
     	res.status(401).json(info);
     }
   })(req, res);
 }
 
 exports.register = function(req, res){
-	User.findOne({email: req.body.email, password: req.body.password}, function(err, user){
+	var user = new User();
+	user.name = req.body.name;
+	user.email = req.body.email;
+	user.setPassword(req.body.password);
+
+	user.save(function(err) {
 		if(err){
-			res.json({
-				type: false,
-				data: "Error ocurred: " + err
-			});
-		}else{
-			if (user) {
+			console.log(err);
+			if(err.code == "11000"){
+				res.status(200);
 				res.json({
-					type: false,
-					data: "User already exists!"
+					data: "User already exits"
 				});
 			}else{
-				var user = new User();
-				user.name = req.body.name;
-  			user.email = req.body.email;
-
-				user.setPassword(req.body.password);
-
-				user.save(function(err) {
-    			var token;
-    			token = user.generateJwt();
-    			res.status(200);
-    			res.json({
-      			"token" : token,
-						"username": user.username
-    			});
-  			});
+				res.status(500);
+				res.json({
+					data: "Error ocurred: " + err
+				});
 			}
+		}else{
+			passport.authenticate('local', function(err2, user, info){
+				var token;
+				//If Passport throws/catches an error
+				if (err2) {
+				  res.status(404).json(err2);
+				  return;
+				}
+				var token;
+				//If Passport throws/catches an error
+				if (err2) {
+				  res.status(404).json(err2);
+				  return;
+				}
+				// If a user is found
+			    if(user){
+			      token = user.generateJwt();
+			      res.status(200);
+			      res.json({
+			        "token" : token,
+					'username': user.name
+			      });
+			    } else {
+			      	// If user is not found
+			    	res.status(401).json(info);
+			    }
+			  })(req, res);
 		}
 	});
 }
+
 
 /*var getErrorMessage = function(err) {
 	var message = '';
