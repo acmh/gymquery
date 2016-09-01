@@ -13,6 +13,8 @@
         /* Click Handlers */
         vm.submitLogin = submitLogin;
         vm.submitRegister = submitRegister;
+        vm.errorLogin = errorLogin;
+        vm.errorRegister = errorRegister;
 
         activate();
 
@@ -25,18 +27,33 @@
         function submitLogin(loginForm) {
             if (!loginForm.$valid) { return; }
 
-            if (authService.login(vm.login) != 0) {
-                vm.error = "Erro! Email/Senha errados!";
-                $timeout(5000).then(function() {
-                    vm.error = false;
-                });
-            }
+            authService.login(vm.login).then(
+                authService.successLogin,
+                vm.errorLogin
+            );
         };
 
         function submitRegister(registerForm) {
             if (!registerForm.$valid) { return; }
 
-            authService.register(vm.register);
+            authService.register(vm.register).then(
+                authService.successLogin,
+                vm.errorRegister
+            );
+        };
+
+        function errorLogin(response) {
+            vm.error = "Erro! Email/Senha errados!";
+            $timeout(3000).then(function() {
+                vm.error = false;
+            });
+        };
+
+        function errorRegister(response) {
+            vm.error = "Erro! Email/Nome já utilizados!";
+            $timeout(3000).then(function() {
+                vm.error = false;
+            });
         };
 
     };

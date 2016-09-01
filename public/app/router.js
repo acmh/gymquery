@@ -8,17 +8,26 @@
     function route ($routeProvider, $locationProvider) {
         $routeProvider
 			.when('/', {
-				template: ' '
+				template: ' ',
+				access: {
+					requiredLogin : false
+				}
 			})
-            .when('/questions', {
-                templateUrl: 'app/Question/_question.html',
-                controller: 'questionController',
-                controllerAs: 'question'
-            })
 			.when('/login', {
 				templateUrl: 'app/Login/_login.html',
 				controller: 'loginController',
-				controllerAs: 'auth'
+				controllerAs: 'auth',
+				access: {
+					requiredLogin : false
+				}
+			})
+			.when('/questions', {
+				templateUrl: 'app/Question/_question.html',
+				controller: 'questionController',
+				controllerAs: 'question',
+				access: {
+					requiredLogin : true
+				}
 			});
 
         $locationProvider.html5Mode(false);
