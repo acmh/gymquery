@@ -4,12 +4,11 @@ var mongoose = require('mongoose'),
 		Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-	name: String,
 	email: {
 		type: String,
 		unique: true
 	},
-	username: {
+	name: {
 		type: String,
 		trim: true,
 		unique: true
@@ -36,7 +35,7 @@ UserSchema.methods.generateJwt = function() {
   return jwt.sign({
     _id: this._id,
     email: this.email,
-    name: this.username,
+    name: this.name,
     exp: parseInt(expiry.getTime() / 1000),
   }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
