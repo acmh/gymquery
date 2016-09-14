@@ -1,6 +1,5 @@
 var User = require('mongoose').model('User'),
-	passport = require('passport');
-var jwt = require('jsonwebtoken');
+	jwt = require('jsonwebtoken');
 
 exports.showprofile = function(req, res){
 	console.log('Entrou');
@@ -10,26 +9,37 @@ exports.showprofile = function(req, res){
 }
 
 exports.login = function(req,res){
-	passport.authenticate('local', function(err, user, info){
-    var token;
-    //If Passport throws/catches an error
-    if (err) {
-      res.status(404).json(err);
-      return;
-    }
-    // If a user is found
-    if(user){
-      token = user.generateJwt();
-      res.status(200);
-      res.json({
-        "token" : token,
-		'username': user.name
-      });
-    } else {
-      	// If user is not found
-    	res.status(401).json(info);
-    }
-  })(req, res);
+	var _email = req.body.email;
+
+	User.findOne({email: _email}, function(err, user) {
+		if(err){
+			res.status(404).json(err);
+			return;
+		}
+
+		//If there is no user with this email
+		if(!user){
+			res.status(401).json({
+				success: false,
+				message: 'Authentication failed. User not found.'
+			});
+
+		}else if(user){
+			if(!user.validPassword(req.body.password)){
+				res.status(401).json({
+					success: false,
+					message: 'Authentication failed. Wrong password.'
+				});
+			}else{
+				var token = user.generateJwt();
+				res.status(200);
+				res.json({
+				  	"token" : token,
+			   		"username" : user.name
+				});
+			}
+		}
+	});
 }
 
 exports.register = function(req, res){
@@ -42,7 +52,7 @@ exports.register = function(req, res){
 		if(err){
 			console.log(err);
 			if(err.code == "11000"){
-				res.status(200);
+				res.status(401);
 				res.json({
 					data: "User already exits"
 				});
@@ -53,32 +63,35 @@ exports.register = function(req, res){
 				});
 			}
 		}else{
-			passport.authenticate('local', function(err2, user, info){
-				var token;
-				//If Passport throws/catches an error
-				if (err2) {
-				  res.status(404).json(err2);
-				  return;
+			User.findOne({email: user.email}, function(err, user) {
+				if(err){
+					res.status(404).json(err);
+					return;
 				}
-				var token;
-				//If Passport throws/catches an error
-				if (err2) {
-				  res.status(404).json(err2);
-				  return;
+
+				//If there is no user with this email
+				if(!user){
+					res.status(401).json({
+						success: false,
+						message: 'Authentication failed. User not found.'
+					});
+
+				}else if(user){
+					if(!user.validPassword(req.body.password)){
+						res.status(401).json({
+							success: false,
+							message: 'Authentication failed. Wrong password.'
+						});
+					}else{
+						token = user.generateJwt();
+						res.status(200);
+						res.json({
+						  	"token" : token,
+					   		"username" : user.name
+						});
+					}
 				}
-				// If a user is found
-			    if(user){
-			      token = user.generateJwt();
-			      res.status(200);
-			      res.json({
-			        "token" : token,
-					'username': user.name
-			      });
-			    } else {
-			      	// If user is not found
-			    	res.status(401).json(info);
-			    }
-			  })(req, res);
+			});
 		}
 	});
 }

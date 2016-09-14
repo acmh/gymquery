@@ -1,5 +1,4 @@
-var Question = require('mongoose').model('Question'),
-    passport = require('passport');
+var Question = require('mongoose').model('Question');
 
 
 exports.createQuestion = function(req, res, next) {
