@@ -1,13 +1,19 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
-
+    Schema = mongoose.Schema,
+    mongoosePaginate = require('mongoose-paginate');
 
 var QuestionSchema = new Schema({
     title: String,
+    background: String,
     creationScript: String,
     populateScript: String,
-    questionList: [{question:String, answer: String}]
+    author: String,
+    updated: {type: Date, default: Date.now},
+    questionList: [{question:String, answer: String}],
+    tags: [String]
 });
+
+QuestionSchema.plugin(mongoosePaginate);
 
 //PRE MIDDLEWARE FOR QUESTION VALIDATION
 QuestionSchema.pre('save',
@@ -15,6 +21,5 @@ QuestionSchema.pre('save',
 				next();
 	}
 );
-
 
 mongoose.model('Question', QuestionSchema);
