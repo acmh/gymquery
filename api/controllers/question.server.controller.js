@@ -2,14 +2,19 @@ var Question = require('mongoose').model('Question');
 
 
 exports.createQuestion = function(req, res, next) {
-    var question = new Question(req.body);
+    console.log(req.body);
+    var question = new Question({
+        title: req.body.title,
+        creationScript: req.body.creation,
+        populateScript: req.body.populate,
+        questionList: req.body.questions
+    });
 
     question.save(function(err) {
         if (err) {
             return next(err);
         } else {
-            console.log("Questão adicionada!");
-            res.json(question);
+            res.status(200).json("Question was created");
         }
     });
 };

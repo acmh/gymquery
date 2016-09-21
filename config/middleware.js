@@ -3,8 +3,9 @@ var jwt = require('jsonwebtoken');
 
 module.exports = function(app, routes) {
   //Generic middleware for protected routes
-  for(rt in routes){
-    app.use(rt, function(req, res, next){
+
+  for(var i = 0; i < routes.length; i++){
+    app.use(routes[i], function(req, res, next){
   		var token = req.body.token || req.query.token || req.headers['x-access-token'];
   		// decode token
   		if (token) {
