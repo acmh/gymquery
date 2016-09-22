@@ -21,10 +21,34 @@
 					requiredLogin : false
 				}
 			})
-			.when('/questions', {
-				templateUrl: 'app/Question/_question.html',
-				controller: 'questionController',
+			.when('/newQuestion', {
+				templateUrl: 'app/Question/_newQuestion.html',
+				controller: 'newQuestionController',
 				controllerAs: 'question',
+				access: {
+					requiredLogin : true
+				}
+			})
+			.when('/questions', {
+				templateUrl: 'app/Question/_questionList.html',
+				controller: 'questionListController',
+				controllerAs: 'question',
+				access: {
+					requiredLogin : true
+				}
+			})
+			.when('/submissions', {
+				templateUrl: 'app/Submission/_submission.html',
+				controller: 'submissionController',
+				controllerAs: 'submission',
+				access: {
+					requiredLogin : true
+				}
+			})
+			.when('/users', {
+				templateUrl: 'app/Users/_users.html',
+				controller: 'userController',
+				controllerAs: 'user',
 				access: {
 					requiredLogin : true
 				}

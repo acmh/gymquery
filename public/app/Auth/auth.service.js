@@ -21,6 +21,7 @@
 			successLogin: successLogin,
 			getLogged: getLogged,
 			getUser: getUser,
+			getToken: getToken
         };
 
         return auth;
@@ -81,6 +82,10 @@
 
 		function getLogged() {
 			return isLogged;
+		};
+
+		function getToken() {
+			return token;
 		}
 
 	};

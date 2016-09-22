@@ -5,16 +5,16 @@
         .module("gymqueryApp")
 		.factory("questionService", questionServ);
 
-	questionServ.$inject = ["$http"];
+	questionServ.$inject = ["$http", "authService"];
 
-	function questionServ ($http) {
+	function questionServ ($http, authService) {
         var service;
-        var questions = [{}];
+        var tasks = [{}];
 
         service = {
-            getQuestions: getQuestions,
-            addQuestion : addQuestion,
-            removeQuestion : removeQuestion,
+            getTasks: getTasks,
+            addTask : addTask,
+            removeTask : removeTask,
 			submitQuestion : submitQuestion
         };
 
@@ -22,27 +22,31 @@
 
 		//////////////////////////////
 
-        function getQuestions() {
-            return questions;
+        function getTasks() {
+            return tasks;
         };
 
-        function addQuestion() {
-            questions.push({});
+        function addTask() {
+            tasks.push({});
         };
 
-        function removeQuestion() {
-            questions.pop();
+        function removeTask() {
+            tasks.pop();
         };
 
-		function submitQuestion(title,creation,populate) {
+		function submitQuestion(form) {
+
 			$http({
 				method: "POST",
 				url: "questions",
 				data: {
-					title: title,
-					creationScript: creation,
-					populateScript: populate,
-					questionList: questions
+					title: form.title,
+					creationScript: form.creation,
+					populateScript: form.populate,
+					background: form.background,
+					tags: form.tags.split(" ").filter(((v, i, a) => a.indexOf(v) === i)),
+					author: authService.getUser(),
+					taskList: tasks
 				}
 			});
 		}

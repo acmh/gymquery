@@ -7,7 +7,7 @@ exports.createQuestion = function(req, res, next) {
         title: req.body.title,
         creationScript: req.body.creation,
         populateScript: req.body.populate,
-        questionList: req.body.questions,
+        taskList: req.body.taskList,
         tags: req.body.tags,
         author: req.body.author,
         background: req.body.background
