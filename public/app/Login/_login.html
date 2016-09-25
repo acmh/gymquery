@@ -10,9 +10,19 @@
                   <div class="col-sm-6">
                       <div class="panel panel-default">
                           <h3>Login</h3>
+                          <hr>
                           <form name="loginForm">
-                              Email : <input type="email" placeholder="Email" ng-model="ctrl.login.email" ng-model-options="{ debounce: 250 }" required><br />
-                              Senha : <input type="password" placeholder="Senha" ng-model="ctrl.login.password" ng-model-options="{ debounce: 250 }" required><br /><br />
+                              <div class="form-group">
+                                  <div class="form-inline form-pair">
+                                      <label for="loginEmail" class="control-label">Email :</label>
+                                      <input class="form-control" id="loginEmail" type="email" placeholder="Email" ng-model="ctrl.login.email" ng-model-options="{ debounce: 250 }" required>
+                                  </div>
+                                  <div class="form-inline form-pair">
+                                      <label for="loginPassword" class="control-label">Senha :</label>
+                                      <input class="form-control" id="loginPassword" type="password" placeholder="Senha" ng-model="ctrl.login.password" ng-model-options="{ debounce: 250 }" required>
+                                  </div>
+                                  <br />
+                              </div>
                               <button type="submit" class="btn btn-primary" ng-click="ctrl.submitLogin(loginForm)">Logar</button>
                           </form>
                           <br />
@@ -21,10 +31,22 @@
                   <div class="col-sm-6">
                       <div class="panel panel-default">
                           <h3>Registrar</h3>
+                          <hr>
                           <form name="registerForm">
-                              Nome do usuário : <input type="text" placeholder="Nome" ng-model="ctrl.register.name" ng-model-options="{ debounce: 250 }" required><br/>
-                              Email : <input type="email" placeholder="Email" ng-model="ctrl.register.email" ng-model-options="{ debounce: 250 }" required><br />
-                              Senha : <input type="password" placeholder="Senha" ng-model="ctrl.register.password" ng-model-options="{ debounce: 250 }" required><br /><br />
+                              <div class="form-group">
+                                  <div class="form-inline form-pair">
+                                      <label for="registerUsername" class="control-label">Nome do Usuário</label>
+                                      <input id="registerUsername" class="form-control" type="text" placeholder="Nome" ng-model="ctrl.register.name" ng-model-options="{ debounce: 250 }" required><br/>
+                                  </div>
+                                  <div class="form-inline form-pair">
+                                      <label for="registerEmail" class="control-label">Email :</label>
+                                      <input id="registerEmail" class="form-control" type="email" placeholder="Email" ng-model="ctrl.register.email" ng-model-options="{ debounce: 250 }" required><br />
+                                  </div>
+                                  <div class="form-inline form-pair">
+                                      <label for="registerPassword" class="control-label">Senha :</label>
+                                      <input id="registerPassword" class="form-control" type="password" placeholder="Senha" ng-model="ctrl.register.password" ng-model-options="{ debounce: 250 }" required><br /><br />
+                                  </div>
+                              </div>
                               <button type="submit" class="btn btn-primary" ng-click="ctrl.submitRegister(registerForm)">Registrar</button>
                           </form>
                           <br />

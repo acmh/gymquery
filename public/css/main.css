@@ -2,7 +2,13 @@
     text-align: center;
 }
 
-/* newQuestion View Classes */
+/* login view classes */
+
+.form-pair {
+    padding: 5px;
+}
+
+/* newQuestion view Classes */
 
 .task-list {
     margin: 10px auto;
@@ -17,7 +23,7 @@
     padding: 5px;
 }
 
-/* questionList View Classes */
+/* questionList view Classes */
 
 .question-list-container {
     margin: 5px;
