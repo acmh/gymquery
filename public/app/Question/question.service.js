@@ -12,15 +12,21 @@
         var tasks = [{}];
 
         service = {
+			// Add Question Functions
             getTasks: getTasks,
             addTask : addTask,
             removeTask : removeTask,
-			submitQuestion : submitQuestion
+			submitQuestion : submitQuestion,
+
+			// Question List Functions
+			getQuestionList: getQuestionList
         };
 
         return service;
 
-		//////////////////////////////
+		/////////////////////////////
+		// Add Question Functions  //
+		/////////////////////////////
 
         function getTasks() {
             return tasks;
@@ -35,7 +41,6 @@
         };
 
 		function submitQuestion(form) {
-
 			$http({
 				method: "POST",
 				url: "questions",
@@ -49,6 +54,23 @@
 					taskList: tasks
 				}
 			});
-		}
+		};
+
+		//////////////////////////////
+		// Question List Functions  //
+		//////////////////////////////
+
+		function getQuestionList(search, page) {
+			return $http({
+				method: "GET",
+				url: "/getQuestionsPaginated",
+				params: {
+					author: search.author,
+					title: search.title,
+					tags: search.tags.split(" ").filter(((v, i, a) => a.indexOf(v) === i)),
+					page: page
+				}
+			});
+		};
 	};
 })();

@@ -60,7 +60,7 @@ exports.getQuestionsPaginated = function(req, res){
 
     options.page = req.query.page;
     options.limit = 10;
-    options.select = "title background author";
+    options.select = "title tags author";
 
     if(req.query.title){
         query.title = req.query.title;
@@ -72,6 +72,10 @@ exports.getQuestionsPaginated = function(req, res){
 
     if(req.query.author){
         query.author = req.query.author;
+    }
+
+    if(req.query.tags){
+        query.tags = { "$in": req.query.tags};
     }
 
     Question.paginate(query, options, function(err, result){

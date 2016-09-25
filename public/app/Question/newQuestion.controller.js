@@ -18,7 +18,7 @@
         vm.removeTask = questionService.removeTask;
         vm.submitQuestion = submitQuestion;
 
-        activate()
+        activate();
 
         ////////////////////////////////
 
@@ -34,13 +34,10 @@
 
         function submitQuestion(questionForm) {
             if (!questionForm.$valid) { return; }
-            
+
             questionService.submitQuestion(vm.form);
-            /*
-            vm.title = '';
-            vm.creation = '';
-            vm.population = '';
-            */
+
+            // TODO: redirect to question page after submitting
         };
     };
 })();

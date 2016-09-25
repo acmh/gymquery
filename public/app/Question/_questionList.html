@@ -1,1 +1,61 @@
-Lista de questões
+<div>
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title central">Lista de questões</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <!-- SearchBox -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-8">
+                            <div class="well">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Autor">
+                                    <span class="input-group-addon"></span>
+                                    <input type="text" class="form-control" placeholder="Título">
+                                    <span class="input-group-addon"></span>
+                                    <input type="text" class="form-control" placeholder="Tags">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" name="button">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Question List -->
+                    <div class="row">
+                        <ul class="list-group question-list-container">
+                            <li ng-repeat="q in ctrl.questions" class="list-group-item">
+                                <div>
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                    <div class="question-header">
+                                        {{::q.title}} <small>{{::q.author}} </small>
+                                    </div>
+                                </div>
+                                <div class="question-tags">
+                                    <span ng-repeat="t in ::q.tags">
+                                        {{t}}
+                                        <span ng-show="!$last">;</span>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="panel-footer"></div>
+
+            </div>
+        </div>
+    </div>
+</div>

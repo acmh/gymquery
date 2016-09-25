@@ -1,3 +1,43 @@
 .central {
     text-align: center;
 }
+
+/* newQuestion View Classes */
+
+.task-list {
+    margin: 10px auto;
+    padding: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.nq-input {
+    width: 50%;
+    margin: 10px auto;
+    padding: 5px;
+}
+
+/* questionList View Classes */
+
+.question-list-container {
+    margin: 5px;
+    padding: 10px;
+}
+
+.question-list-container > li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.question-header {
+    color:black;
+    cursor: pointer;
+    display:inline-block;
+    font-size: large;
+}
+
+.question-tags {
+    color: gray;
+    margin-right: 0px;
+    display:inline-block;
+}
