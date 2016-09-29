@@ -1,21 +1,40 @@
-<div>
-    <div class="row central">
-        <div class="panel panel-default">
-            <h3>Criar questão</h3>
-            <form name="questionForm">
-                Título : <input type="text" ng-model="question.form.title" required><br/>
-                Background : <textarea ng-model="question.form.background" rows="2" cols="40" required></textarea><br />
-                Script de criação : <textarea ng-model="question.form.creation" rows="2" cols="40" required></textarea><br />
-                Script de povoamento : <textarea ng-model="question.form.population" rows="2" cols="40" required></textarea><br />
-                Tags (separadas por espaço) : <input type="text" ng-model="question.form.tags" required><br/>
-                <div class="panel panel-default" ng-repeat="pair in question.tasks">
-                    Pergunta : <textarea ng-model="pair.task" rows="2" cols="20" required></textarea>
-                    Script de Resposta : <textarea ng-model="pair.answer" rows="2" cols="20" required></textarea>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title central"><b>Criar questão</b></h3>
                 </div>
-                <button type="button" class="btn btn-primary" ng-click="question.addTask()">+</button>
-                <button type="button" class="btn btn-danger" ng-click="question.removeTask()">-</button><br /><br />
-                <button type="submit" class="btn btn-success" ng-click="question.submitQuestion(questionForm)">Submeter Questão</button>
-            </form>
+
+                <div class="panel-body central">
+                    <div class="well" style="display: inline-block">
+                        <form name="questionForm">
+                            <input type="text" placeholder="Título" class="form-control" ng-model="ctrl.form.title" required><br/>
+                            <textarea placeholder="Background" class="form-control" ng-model="ctrl.form.background" rows="2" cols="40" required></textarea><br />
+                            <hr>
+                            <textarea placeholder="Script de Criação" class="form-control" ng-model="ctrl.form.creation" rows="2" cols="40" required></textarea><br />
+                            <textarea placeholder="Script de Povoamento" class="form-control" ng-model="ctrl.form.population" rows="2" cols="40" required></textarea><br />
+                            <hr>
+                            <input placeholder="Tags (separadas por espaço)" class="form-control" type="text" ng-model="ctrl.form.tags" required><br/>
+                            <div class="task-list">
+                                <div ng-repeat="pair in ctrl.tasks" class="panel panel-default">
+                                    <textarea placeholder="Pergunta" class="form-control" style="display:inline" ng-model="pair.task" rows="2" cols="50" required></textarea>
+                                    <br>
+                                    <textarea placeholder="Script de Resposta" class="form-control" style="display:inline" ng-model="pair.answer" rows="2" cols="50" required></textarea>
+                                </div>
+                            </div>
+                            <br />
+                            <button type="button" class="btn btn-primary" ng-click="ctrl.addTask()">+</button>
+                            <button type="button" class="btn btn-danger" ng-click="ctrl.removeTask()">-</button><br /><br />
+                            <hr>
+                            <button type="submit" class="btn btn-success" ng-click="ctrl.submitQuestion(questionForm)">Submeter Questão</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="panel-footer"></div>
+            </div>
         </div>
     </div>
 </div>

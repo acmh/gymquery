@@ -1,26 +1,61 @@
-<div>
-    <div class="row central">
-        <div class="alert alert-danger" ng-show="auth.error">{{auth.error}}</div>
-        <div class="col-sm-6">
-            <div class="panel panel-default">
-                <h3>Login</h3>
-                <form name="loginForm">
-                    Email : <input type="email" placeholder="Email" ng-model="auth.login.email" ng-model-options="{ debounce: 250 }" required><br />
-                    Senha : <input type="password" placeholder="Senha" ng-model="auth.login.password" ng-model-options="{ debounce: 250 }" required><br /><br />
-                    <button type="submit" class="btn btn-primary" ng-click="auth.submitLogin(loginForm)">Logar</button>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+            <div class="panel panel-default central">
+              <div class="panel-heading">
 
-                </form>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="panel panel-default">
-                <h3>Registrar</h3>
-                <form name="registerForm">
-                    Nome do usuário : <input type="text" placeholder="Nome" ng-model="auth.register.name" ng-model-options="{ debounce: 250 }" required><br/>
-                    Email : <input type="email" placeholder="Email" ng-model="auth.register.email" ng-model-options="{ debounce: 250 }" required><br />
-                    Senha : <input type="password" placeholder="Senha" ng-model="auth.register.password" ng-model-options="{ debounce: 250 }" required><br /><br />
-                    <button type="submit" class="btn btn-primary" ng-click="auth.submitRegister(registerForm)">Registrar</button>
-                </form>
+              </div>
+              <div class="panel-body">
+                  <div class="alert alert-danger" ng-show="ctrl.error">{{ctrl.error}}</div>
+                  <div class="col-sm-6">
+                      <div class="panel panel-default">
+                          <h3>Login</h3>
+                          <hr>
+                          <form name="loginForm">
+                              <div class="form-group">
+                                  <div class="form-inline form-pair">
+                                      <label for="loginEmail" class="control-label">Email :</label>
+                                      <input class="form-control" id="loginEmail" type="email" placeholder="Email" ng-model="ctrl.login.email" ng-model-options="{ debounce: 250 }" required>
+                                  </div>
+                                  <div class="form-inline form-pair">
+                                      <label for="loginPassword" class="control-label">Senha :</label>
+                                      <input class="form-control" id="loginPassword" type="password" placeholder="Senha" ng-model="ctrl.login.password" ng-model-options="{ debounce: 250 }" required>
+                                  </div>
+                                  <br />
+                              </div>
+                              <button type="submit" class="btn btn-primary" ng-click="ctrl.submitLogin(loginForm)">Logar</button>
+                          </form>
+                          <br />
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="panel panel-default">
+                          <h3>Registrar</h3>
+                          <hr>
+                          <form name="registerForm">
+                              <div class="form-group">
+                                  <div class="form-inline form-pair">
+                                      <label for="registerUsername" class="control-label">Nome do Usuário :</label>
+                                      <input id="registerUsername" class="form-control" type="text" placeholder="Nome" ng-model="ctrl.register.name" ng-model-options="{ debounce: 250 }" required><br/>
+                                  </div>
+                                  <div class="form-inline form-pair">
+                                      <label for="registerEmail" class="control-label">Email :</label>
+                                      <input id="registerEmail" class="form-control" type="email" placeholder="Email" ng-model="ctrl.register.email" ng-model-options="{ debounce: 250 }" required><br />
+                                  </div>
+                                  <div class="form-inline form-pair">
+                                      <label for="registerPassword" class="control-label">Senha :</label>
+                                      <input id="registerPassword" class="form-control" type="password" placeholder="Senha" ng-model="ctrl.register.password" ng-model-options="{ debounce: 250 }" required><br /><br />
+                                  </div>
+                              </div>
+                              <button type="submit" class="btn btn-primary" ng-click="ctrl.submitRegister(registerForm)">Registrar</button>
+                          </form>
+                          <br />
+                      </div>
+                  </div>
+              </div>
+              <div class="panel-footer">
+
+              </div>
             </div>
         </div>
     </div>
