@@ -8,6 +8,6 @@ module.exports = function(app){
 
     app.route('/questionsPaginated').get(question.questionsPaginated);
 
-    app.route('/questions/:id').get(question.question);
+    app.route('/question/:id').get(question.question);
 
 };

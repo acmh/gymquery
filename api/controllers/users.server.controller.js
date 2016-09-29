@@ -55,12 +55,12 @@ exports.register = function(req, res){
 			if(err.code == "11000"){
 				res.status(401);
 				res.json({
-					data: "User already exits"
+					message: "User already exits"
 				});
 			}else{
 				res.status(500);
 				res.json({
-					data: "Error ocurred: " + err
+					message: "Error ocurred: " + err
 				});
 			}
 		}else{
