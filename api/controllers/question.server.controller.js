@@ -1,6 +1,5 @@
 var Question = require('mongoose').model('Question');
 
-
 exports.createQuestion = function(req, res, next) {
 
     var question = new Question({
@@ -22,38 +21,7 @@ exports.createQuestion = function(req, res, next) {
     });
 };
 
-exports.renderQuestions = function(req, res, next) {
-
-    if (!req.user) {
-
-
-    } else {
-        res.render('question', {
-            user: req.user ? req.user.username : "",
-            title: "Create Questions", //page title
-            action: "/question", //post action for the form
-            fields: [{
-                    name: "Title",
-                    type: 'text',
-                    property: "required"
-                }, //first field for the form
-                {
-                    name: "Creation Scripts",
-                    type: "text",
-                    property: "required"
-                }, //another field for the form
-                {
-                    name: "Populate Scripts",
-                    type: "text",
-                    property: "required"
-                }
-            ],
-            buttonName: "Submit"
-        });
-    }
-};
-
-exports.getQuestionsPaginated = function(req, res){
+exports.questionsPaginated = function(req, res){
 
     var query = {};
     var options = {};
@@ -74,9 +42,13 @@ exports.getQuestionsPaginated = function(req, res){
         query.author = req.query.author;
     }
 
+
+
     Question.paginate(query, options, function(err, result){
         if(err){
-            res.status(500).json(err.message);
+            res.status(500).json({
+                message: err.message
+            });
         }else{
             console.log(result);
             res.status(200).json({
@@ -86,4 +58,20 @@ exports.getQuestionsPaginated = function(req, res){
         }
     });
 
+}
+
+exports.question = function(req,res){
+    var _id = req.query.id;
+    Question.findOne({id: _id}, function(err, question){
+        if(err){
+            res.status(400).json({
+                message: err.message
+            });
+        }else{
+            res.status(200).json({
+                success: true,
+                question: question
+            });
+        }
+    });
 }
