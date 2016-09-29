@@ -10,7 +10,6 @@ exports.showprofile = function(req, res){
 
 exports.login = function(req,res){
 	var _email = req.body.email;
-
 	User.findOne({email: _email}, function(err, user) {
 		if(err){
 			res.status(404).json(err);

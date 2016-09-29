@@ -9,7 +9,7 @@ var QuestionSchema = new Schema({
     populateScript: String,
     author: String,
     updated: {type: Date, default: Date.now},
-    taskList: [{task:String, answer: String}],
+    taskList: [{task:String, answer: {type:String, select: false}}],
     tags: [String]
 });
 
