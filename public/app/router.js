@@ -37,6 +37,14 @@
 					requiredLogin : true
 				}
 			})
+			.when('/question/:qid', {
+				templateUrl: 'app/Question/_question.html',
+				controller: 'questionController',
+				controllerAs: 'ctrl',
+				access: {
+					requiredLogin : true
+				}
+			})
 			.when('/submissions', {
 				templateUrl: 'app/Submission/_submission.html',
 				controller: 'submissionController',

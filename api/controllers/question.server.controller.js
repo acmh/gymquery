@@ -2,21 +2,15 @@ var Question = require('mongoose').model('Question');
 
 exports.createQuestion = function(req, res, next) {
 
-    var question = new Question({
-        title: req.body.title,
-        creationScript: req.body.creation,
-        populateScript: req.body.populate,
-        taskList: req.body.taskList,
-        tags: req.body.tags,
-        author: req.body.author,
-        background: req.body.background
-    });
+    var question = new Question(req.body);
 
     question.save(function(err) {
         if (err) {
             return next(err);
         } else {
-            res.status(200).json("Question was created");
+            res.status(200).json({
+                success:true
+            });
         }
     });
 };
@@ -64,8 +58,8 @@ exports.questionsPaginated = function(req, res){
 }
 
 exports.question = function(req,res){
-    var _id = req.query.id;
-    Question.findOne({id: _id}, function(err, question){
+    var _id = req.params.id;
+    Question.findOne({_id: _id}, function(err, question){
         if(err){
             res.status(400).json({
                 message: err.message

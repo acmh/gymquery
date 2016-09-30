@@ -28,6 +28,7 @@
                 function(res) {
                     vm.questions = res.data.questions.docs;
                 }
+                //TODO error callback
             );
         };
     };

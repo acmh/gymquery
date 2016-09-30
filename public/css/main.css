@@ -36,8 +36,6 @@
 }
 
 .question-header {
-    color:black;
-    cursor: pointer;
     display:inline-block;
     font-size: large;
 }

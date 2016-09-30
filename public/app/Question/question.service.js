@@ -19,7 +19,10 @@
 			submitQuestion : submitQuestion,
 
 			// Question List Functions
-			getQuestionList: getQuestionList
+			getQuestionList: getQuestionList,
+
+			// Question Functions
+			getQuestion: getQuestion
         };
 
         return service;
@@ -43,11 +46,11 @@
 		function submitQuestion(form) {
 			$http({
 				method: "POST",
-				url: "questions",
+				url: "/questions",
 				data: {
 					title: form.title,
 					creationScript: form.creation,
-					populateScript: form.populate,
+					populateScript: form.population,
 					background: form.background,
 					tags: form.tags.split(" ").filter(((v, i, a) => a.indexOf(v) === i)),
 					author: authService.getUser(),
@@ -63,13 +66,24 @@
 		function getQuestionList(search, page) {
 			return $http({
 				method: "GET",
-				url: "/getQuestionsPaginated",
+				url: "/questionsPaginated",
 				params: {
 					author: search.author,
 					title: search.title,
 					tags: search.tags.split(" ").filter(((v, i, a) => a.indexOf(v) === i)),
 					page: page
 				}
+			});
+		};
+
+		//////////////////////////////
+		//// Question  Functions  ////
+		//////////////////////////////
+
+		function getQuestion(qid) {
+			return $http({
+				method: "GET",
+				url: "/question/" + qid
 			});
 		};
 	};

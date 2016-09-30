@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title central"><b>Questão</b></h3>
+                </div>
+
+                <div class="panel-body central">
+
+                    <!-- Meta information -->
+                    <h2>{{::ctrl.question.title}}</h2>
+                    <h3><small>Enviada por <i>{{::ctrl.question.author}}</i>
+                         em {{::ctrl.question.updated | date:'dd/MM/yyyy'}}
+                         às {{::ctrl.question.updated | date:'HH:mm'}}
+                         <br>
+                         Tags : <span ng-repeat="t in ::ctrl.question.tags">
+                                    {{t}}
+                                    <span ng-show="!$last">;</span>
+                                </span>
+                     </small></h3>
+                    <hr>
+
+                    <!-- Background -->
+                    <p style="text-align: justify">
+                        {{::ctrl.question.background}}
+                    </p>
+
+                    <hr>
+
+                    <!-- Task list -->
+                    <dl class="dl-horizontal">
+                        <span ng-repeat="t in ::ctrl.question.taskList"
+                            style="text-align: justify">
+                            <dt>Pergunta {{::$index+1}}</dt>
+                            <dd>{{::t.task}}</dd>
+                        </span>
+                    </dl>
+
+                    <hr>
+
+                    <!-- Submit Button -->
+                    <div class="col-md-offset-4 col-md-4">
+                        <button type="button" class="btn btn-success btn-block" name="button">Criar submissão</button>
+                    </div>
+                </div>
+
+                <div class="panel-footer"></div>
+
+            </div>
+        </div>
+    </div>
+</div>

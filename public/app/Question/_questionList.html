@@ -37,9 +37,9 @@
                             <li ng-repeat="q in ctrl.questions" class="list-group-item">
                                 <div>
                                     <span class="glyphicon glyphicon-edit"></span>
-                                    <div class="question-header">
+                                    <a href="/#/question/{{::q._id}}" class="question-header">
                                         {{::q.title}} <small>{{::q.author}} </small>
-                                    </div>
+                                    </a>
                                 </div>
                                 <div class="question-tags">
                                     <span ng-repeat="t in ::q.tags">
