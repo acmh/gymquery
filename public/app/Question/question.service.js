@@ -44,7 +44,7 @@
         };
 
 		function submitQuestion(form) {
-			$http({
+			return $http({
 				method: "POST",
 				url: "/questions",
 				data: {

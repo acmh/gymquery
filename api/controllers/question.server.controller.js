@@ -4,12 +4,13 @@ exports.createQuestion = function(req, res, next) {
 
     var question = new Question(req.body);
 
-    question.save(function(err) {
+    question.save(function(err, addedQuestion) {
         if (err) {
             return next(err);
         } else {
             res.status(200).json({
-                success:true
+                success:true,
+                questionId: addedQuestion._id
             });
         }
     });

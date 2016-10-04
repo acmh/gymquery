@@ -5,9 +5,9 @@
         .module("gymqueryApp")
         .controller("newQuestionController", newQuestionCtrl);
 
-    newQuestionCtrl.$inject = ["questionService"];
+    newQuestionCtrl.$inject = ["questionService", "$location"];
 
-    function newQuestionCtrl (questionService) {
+    function newQuestionCtrl (questionService, $location) {
         var vm = this;
 
         /* Models */
@@ -35,9 +35,15 @@
         function submitQuestion(questionForm) {
             if (!questionForm.$valid) { return; }
 
-            questionService.submitQuestion(vm.form);
+            questionService.submitQuestion(vm.form).then(
+                submitSuccess
+            );
 
-            // TODO: redirect to question page after submitting
+            //TODO: error callback
+        };
+
+        function submitSuccess(res) {
+            $location.url("/question/" + res.data.questionId);
         };
     };
 })();
