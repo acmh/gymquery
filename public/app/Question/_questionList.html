@@ -14,13 +14,13 @@
                         <div class="col-md-offset-2 col-md-8">
                             <div class="well">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Autor">
+                                    <input type="text" class="form-control" placeholder="Autor" ng-model="ctrl.searchInput.author" ng-model-options="{ debounce: 250 }">
                                     <span class="input-group-addon"></span>
-                                    <input type="text" class="form-control" placeholder="Título">
+                                    <input type="text" class="form-control" placeholder="Título" ng-model="ctrl.searchInput.title" ng-model-options="{ debounce: 250 }">
                                     <span class="input-group-addon"></span>
-                                    <input type="text" class="form-control" placeholder="Tags">
+                                    <input type="text" class="form-control" placeholder="Tags" ng-model="ctrl.searchInput.tags" ng-model-options="{ debounce: 250 }">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button" name="searchButton">
+                                        <button class="btn btn-default" type="button" name="searchButton" ng-click="ctrl.search()">
                                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                         </button>
                                     </span>

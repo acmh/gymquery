@@ -38,6 +38,10 @@ exports.questionsPaginated = function(req, res){
     }
 
     if(req.query.tags){
+        //If only one tag, put into an array: $in only accepts arrays
+        if(req.query.tags.constructor !== Array){
+            req.query.tags = [req.query.tags];
+        }
         query.tags = { "$in": req.query.tags};
     }
 
