@@ -20,7 +20,7 @@
                                     <span class="input-group-addon"></span>
                                     <input type="text" class="form-control" placeholder="Tags">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button" name="button">
+                                        <button class="btn btn-default" type="button" name="searchButton">
                                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                         </button>
                                     </span>
@@ -30,6 +30,10 @@
                     </div>
 
                     <hr />
+
+                    <div class="central">
+                        Mostrando {{ctrl.questions.length}} de {{ctrl.pageInfo.total}} questões encontradas
+                    </div>
 
                     <!-- Question List -->
                     <div class="row">
@@ -49,6 +53,13 @@
                                 </div>
                             </li>
                         </ul>
+                    </div>
+
+                    <!-- Get more questions button -->
+                    <div class="col-md-offset-4 col-md-4">
+                        <button class="btn btn-primary btn-block" type="button" name="getMoreButton"
+                            ng-show="ctrl.questions.length !== ctrl.pageInfo.total && ctrl.enableGetMoreButton"
+                            ng-click="ctrl.getMoreQuestions()">Mais questões</button>
                     </div>
 
                 </div>
