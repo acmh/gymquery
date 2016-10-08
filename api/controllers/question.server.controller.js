@@ -23,10 +23,10 @@ exports.questionsPaginated = function(req, res){
 
     options.page = req.query.page;
     options.limit = 10;
-    options.select = "title tags author updated";
+    options.select = "title tags author updatedb";
 
     if(req.query.title){
-        query.title = req.query.title;
+        query.title = { "$regex": req.query.title };
     }
 
     if(req.query.sort){
