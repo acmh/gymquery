@@ -7,6 +7,7 @@ module.exports = function() {
 
 	require('../api/models/user.server.model');
 	require('../api/models/question.server.model');
+	require('../api/models/postgres.server.model').init;
 
 	return db;
 };

@@ -38,6 +38,8 @@
     "passport-facebook": "^1.0.3",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.2",
+    "pg": "^6.1.0",
+    "pg-promise": "^5.3.5",
     "serve-favicon": "~2.3.0"
   }
 }

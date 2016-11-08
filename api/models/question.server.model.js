@@ -10,7 +10,8 @@ var QuestionSchema = new Schema({
     author: String,
     updated: {type: Date, default: Date.now},
     taskList: [{task:String, answer: {type:String, select: false}}],
-    tags: [String]
+    tags: [String],
+    tables: [{table: String, columns: [String]}]
 });
 
 QuestionSchema.plugin(mongoosePaginate);

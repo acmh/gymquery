@@ -1,19 +1,76 @@
 var Question = require('mongoose').model('Question');
+var Database = require('../models/postgres.server.model');
+
+exports = module.exports = {};
 
 exports.createQuestion = function(req, res, next) {
 
-    var question = new Question(req.body);
+    var tables = {};
 
-    question.save(function(err, addedQuestion) {
-        if (err) {
-            return next(err);
-        } else {
-            res.status(200).json({
-                success:true,
-                questionId: addedQuestion._id
-            });
-        }
+    var question = new Question({
+        title: req.body.title,
+        background: req.body.background,
+        creationScript: req.body.creation,
+        populateScript: req.body.populate,
+        author: req.body.author,
+        taskList: req.body.taskList,
+        tags: req.body.tags
     });
+
+
+
+    Database.getTables(req.body.creation).then(function(data){
+
+        var response = {};
+
+        data.forEach(function(x){
+            if(!response[x.table_name]){
+                response[x.table_name] = [];
+                response[x.table_name].push(x.column_name);
+            }else{
+                response[x.table_name].push(x.column_name);
+            }
+        })
+
+        tables = [];
+
+        for(var table in response){
+            tables.push({
+                table: table,
+                columns: response[table]
+            })
+        }
+
+        question.tables = tables;
+
+        question.save(function(err, addedQuestion) {
+            if (err) {
+                return next(err);
+            } else {
+                res.status(200).json({
+                    success:true,
+                    questionId: addedQuestion._id
+                });
+            }
+        });
+
+    }).catch(function(error){
+
+        if(error.code == "42601"){
+            res.status(500).json({
+                success:false,
+                erro: "Syntax Error"
+            })
+        }else{
+            res.status(500).json({
+                success:false,
+                erro: error
+            })
+        }
+    })
+
+
+
 };
 
 exports.questionsPaginated = function(req, res){
@@ -76,4 +133,8 @@ exports.question = function(req,res){
             });
         }
     });
+}
+
+exports.answerQuestion = function(req, res){
+
 }
