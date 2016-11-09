@@ -120,21 +120,28 @@ exports.questionsPaginated = function(req, res){
 }
 
 exports.question = function(req,res){
-    var _id = req.params.id;
-    Question.findOne({_id: _id}, function(err, question){
-        if(err){
-            res.status(400).json({
-                message: err.message
-            });
-        }else{
-            res.status(200).json({
-                success: true,
-                question: question
-            });
-        }
-    });
+    if(req.question){
+        res.status(200).json({
+            success: true,
+            question: question
+        });
+    }
+    else{
+        res.status(400).json({
+            message: "Questao nao encontrada"
+        });
+    }
+
 }
 
-exports.answerQuestion = function(req, res){
+exports.getQuestionById = function(req, res){
+    var _id = req.params.id;
+    Question.findOne({_id: _id}, function(err, question){
+        req.question = question;
+    });
+    next();
+}
+
+exports.answer = function(req, res){
 
 }

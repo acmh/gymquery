@@ -20,7 +20,7 @@ exports.db = function getDb(){
     return exports.__pool || (exports.__pool = pgp(config));
 }
 
-exports.getTables = function(queryString, callback){
+exports.getTables = function(queryString){
     var db = exports.db();
 
     var idx = 0;
@@ -67,4 +67,8 @@ exports.getTables = function(queryString, callback){
                 return t.any(f);
             })
         })
+}
+
+exports.submitQuestion = function(){
+
 }
