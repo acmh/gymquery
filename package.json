@@ -40,6 +40,7 @@
     "passport-twitter": "^1.0.2",
     "pg": "^6.1.0",
     "pg-promise": "^5.3.5",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "underscore": "^1.8.3"
   }
 }

@@ -3,7 +3,6 @@ var jwt = require('jsonwebtoken');
 
 module.exports = function(app, routes) {
   //Generic middleware for protected routes
-
   for(var i = 0; i < routes.length; i++){
     app.use(routes[i], function(req, res, next){
   		var token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -29,4 +28,9 @@ module.exports = function(app, routes) {
   	  }
   	});
   }
+
+
+
+
+
 }

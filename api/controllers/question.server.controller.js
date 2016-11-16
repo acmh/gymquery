@@ -64,7 +64,7 @@ exports.createQuestion = function(req, res, next) {
         }else{
             res.status(500).json({
                 success:false,
-                erro: error
+                error: error
             })
         }
     })
@@ -120,10 +120,11 @@ exports.questionsPaginated = function(req, res){
 }
 
 exports.question = function(req,res){
+
     if(req.question){
         res.status(200).json({
             success: true,
-            question: question
+            question: req.question
         });
     }
     else{
@@ -134,14 +135,77 @@ exports.question = function(req,res){
 
 }
 
-exports.getQuestionById = function(req, res){
+exports.getQuestionById = function(req, res, next){
     var _id = req.params.id;
+
     Question.findOne({_id: _id}, function(err, question){
         req.question = question;
+        next();
     });
-    next();
+
 }
 
 exports.answer = function(req, res){
+    var id = req.params.id;
+    var taskID = req.body.taskID;
+    var answer = req.body.answer;
 
+    Question.findOne({_id: id}, 'creationScript populateScript taskList', function(err, question){
+        if(err){
+            res.status(500).json({
+                success: false,
+                error: err.message
+            })
+        }else if(question == null){
+            res.status(200).json({
+                success: false,
+                message: "Questão não encontrada"
+            })
+        }else{
+            var taskList;
+
+            for(var i = 0; i < question.taskList.length; i++){
+                if(taskID == question.taskList[i]._id){
+                    taskList = question.taskList[i];
+                }
+            }
+
+            /*if(result.code == "42601"){
+                res.status(500).json({
+                    message: "Syntax Error",
+                    success: false
+                })
+            }else if(result.veredict == true){
+
+            }else{
+
+            }*/
+
+
+
+
+            Database.getQuestionVeredict(question.creationScript, question.populateScript, taskList, answer).then(function(result){
+                
+                var veredict = JSON.stringify(result[0]) === JSON.stringify(result[1])
+                if(veredict){
+
+                    res.status(200).json({
+                        message: "Correct Answer",
+                        success: true
+                    });
+                }else{
+                    res.status(200).json({
+                        message: "Wrong Answer",
+                        success: true
+                    })
+                }
+            }).catch(function(error){
+                res.status(500).json({
+                    success:false,
+                    error: error
+                })
+            })
+
+        }
+    })
 }

@@ -1,4 +1,10 @@
-var pgp = require('pg-promise')();
+var pgp = require('pg-promise')({
+    disconnect: function(client, dc) {
+       var cp = client.connectionParameters;
+       console.log("Disconnecting from database:", cp.database);
+    }
+});
+var Question = require('mongoose').model('Question');
 
 var config = {
   user: 'postgres',
@@ -69,6 +75,50 @@ exports.getTables = function(queryString){
         })
 }
 
-exports.submitQuestion = function(){
+exports.getQuestionVeredict = function(creationScript, populateScript, taskList, answer){
+    var db = exports.db();
+
+    var queries = [];
+
+    creationScript = creationScript.split(';');
+    populateScript = populateScript.split(';');
+
+    creationScript.forEach(function(query){
+        query = query.toLowerCase();
+        if(idx = query.indexOf("create") > -1){
+            //No final da transação espera-se que a tabela tenha sido deletada
+            query = query.substring(0, idx + 6) + "temporary" + query.substring(idx + 5, query.length);
+        }
+        queries.push({query:query});
+    })
+
+    var q = pgp.helpers.concat(queries);
+    var p = pgp.helpers.concat(populateScript);
+
+    var monitorAnswer, studentAnswer;
+
+    return db.tx(function(t){
+        var queries = [];
+        queries.push(
+            this.task(function(t){
+               return t.none(q).then(function(){
+                   return t.none(p).then(function(){
+                       return t.any(taskList.answer);
+                   })
+               })
+           })
+        )
+        queries.push(
+            db.task(function(z){
+               return z.none(q).then(function(){
+                   return z.none(p).then(function(){
+                       return z.any(answer);
+                   })
+               })
+           })
+        )
+        return this.batch(queries);
+
+    })
 
 }

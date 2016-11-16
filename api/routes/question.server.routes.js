@@ -8,6 +8,9 @@ module.exports = function(app){
 
     app.route('/questionsPaginated').get(question.questionsPaginated);
 
-    app.route('/question/:id').all(question.getQuestionById).get(question.question).post(question.answer);
+    var mArray = [question.getQuestionById];
+
+
+    app.route('/question/:id').get(mArray,question.question).post(question.answer);
 
 };
