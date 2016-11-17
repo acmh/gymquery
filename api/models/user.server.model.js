@@ -15,6 +15,7 @@ var UserSchema = new Schema({
 	},
 	password: String,
 	salt: String,
+	role: {type: Number, select: false, default: 1}
 });
 
 UserSchema.methods.setPassword = function(password){
@@ -37,6 +38,7 @@ UserSchema.methods.generateJwt = function() {
     email: this.email,
     name: this.name,
     exp: parseInt(expiry.getTime() / 1000),
+	role: this.role
   }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 

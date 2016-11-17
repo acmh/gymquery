@@ -15,7 +15,8 @@ module.exports = function() {
 
 	app.set('views', './api/views');
 	app.set('view engine', 'ejs');
-
+	app.set('MONITOR_ROLE', 0);
+	app.set('STUDENT_ROLE', 1);
 	app.use(flash());
 
 

@@ -1,12 +1,7 @@
 var User = require('mongoose').model('User'),
 	jwt = require('jsonwebtoken');
 
-exports.showprofile = function(req, res){
-	console.log('Entrou');
-	res	.json({
-		'alo':'molieres'
-	});
-}
+exports = module.exports = {};
 
 exports.login = function(req,res){
 	var _email = req.body.email;
@@ -95,6 +90,8 @@ exports.register = function(req, res){
 		}
 	});
 }
+
+
 
 
 /*var getErrorMessage = function(err) {

@@ -4,10 +4,8 @@ var jwt = require('jsonwebtoken');
 
 
 
-module.exports = function(app) {
 
-	app.route('/profile')
-		.get(users.showprofile);
+module.exports = function(app) {
 
 	app.route('/register')
 		.post(users.register);

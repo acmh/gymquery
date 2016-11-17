@@ -170,22 +170,8 @@ exports.answer = function(req, res){
                 }
             }
 
-            /*if(result.code == "42601"){
-                res.status(500).json({
-                    message: "Syntax Error",
-                    success: false
-                })
-            }else if(result.veredict == true){
-
-            }else{
-
-            }*/
-
-
-
-
             Database.getQuestionVeredict(question.creationScript, question.populateScript, taskList, answer).then(function(result){
-                
+
                 var veredict = JSON.stringify(result[0]) === JSON.stringify(result[1])
                 if(veredict){
 
