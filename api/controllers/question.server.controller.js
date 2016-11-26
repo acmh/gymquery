@@ -1,5 +1,6 @@
 var Question = require('mongoose').model('Question');
 var Database = require('../models/postgres.server.model');
+var User = require('mongoose').model('User');
 
 exports = module.exports = {};
 
@@ -171,19 +172,34 @@ exports.answer = function(req, res){
             }
 
             Database.getQuestionVeredict(question.creationScript, question.populateScript, taskList, answer).then(function(result){
-
                 var veredict = JSON.stringify(result[0]) === JSON.stringify(result[1])
                 if(veredict){
-
-                    res.status(200).json({
-                        message: "Correct Answer",
-                        success: true
-                    });
+                  User.findOneAndUpdate({email: req.decoded.email}, {"$inc": {"acc": 1}} ,function(err){
+                    if(err){
+                      res.status(500).json({
+                        success: false,
+                        error: err.message
+                      })
+                    }
+                  });
+                  res.status(200).json({
+                      message: "Correct Answer",
+                      success: true
+                  });
                 }else{
-                    res.status(200).json({
-                        message: "Wrong Answer",
-                        success: true
-                    })
+                  User.findOneAndUpdate({email: req.decoded.email}, {"$inc": {"tried": 1}} ,function(err){
+                    if(err){
+                      res.status(500).json({
+                        success: false,
+                        error: err.message
+                      })
+                    }
+                  });
+
+                  res.status(200).json({
+                      message: "Wrong Answer",
+                      success: true
+                  })
                 }
             }).catch(function(error){
                 res.status(500).json({

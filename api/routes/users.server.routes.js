@@ -13,4 +13,6 @@ module.exports = function(app) {
 	app.route('/login')
 		.post(users.login);
 
+	app.route('/topratedstudent')
+		.get(users.topten);
 };

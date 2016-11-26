@@ -91,7 +91,35 @@ exports.register = function(req, res){
 	});
 }
 
+exports.topten = function(req, res){
 
+	User
+	.find({role: 1})
+	.sort({"acc": -1})
+	.limit(10)
+	.exec(function(err, users){
+			if(err){
+				res.status(500).json({
+					sucess: false,
+					error: err.message
+				})
+			}else{
+				var data = [];
+
+				users.forEach(function(user){
+					data.push({
+						name: user.name,
+						rating: user.acc
+					})
+				})
+
+				res.status(200).json({
+					success: true,
+					data: data
+				})
+			}
+	})
+}
 
 
 /*var getErrorMessage = function(err) {

@@ -2,7 +2,8 @@ var config = require('./config'),
 	express = require('express'),
 	bodyParser = require('body-parser'),
 	flash = require('connect-flash'),
-	session = require('express-session');
+	session = require('express-session'),
+	path = require('path');
 
 module.exports = function() {
 	var app = express();
@@ -24,8 +25,6 @@ module.exports = function() {
 	require('../api/routes/index.server.routes.js')(app);
 	require('../api/routes/users.server.routes.js')(app);
 	require('../api/routes/question.server.routes.js')(app);
-
-	app.use(express.static('./public'));
-
+	
 	return app;
 };
