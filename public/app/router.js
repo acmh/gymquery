@@ -8,7 +8,7 @@
     function route ($routeProvider, $locationProvider) {
         $routeProvider
 			.when('/', {
-				template: ' ',
+				templateUrl: 'app/Home/_index.html',
 				access: {
 					requiredLogin : false
 				}
