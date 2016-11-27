@@ -1,67 +1,21 @@
-  <div class="row">
-        <div class=" col-md-12">
-            <div class="panel panel-default central">
-              <div class="panel-heading">
-    						<div class="row">
-    							<div class="col-xs-6">
-    								<a href="#" id="login-form-link">Login</a>
-    							</div>
-    							<div class="col-xs-6">
-    								<a href="#" id="register-form-link">Register</a>
-    							</div>
-    						</div>
-    				</div>
-              <div class="panel-body">
-                  <div class="alert alert-danger" ng-show="ctrl.error">{{ctrl.error}}</div>
-                  <div class="col-md-6">
-                      <div class="panel panel-default">
-                          <form name="loginForm" >
-                              <div class="form-group row">
-
-                                      <label for="loginEmail" class="control-label col-xs-4">Email :</label>
-                                      <div class="col-xs-8">
-                                        <input class="form-control" id="loginEmail" type="email" placeholder="Email" ng-model="ctrl.login.email" ng-model-options="{ debounce: 250 }" required>
-                                      </div>
-                              </div>
-                              <div class="form-group row">
-                                      <label for="loginPassword" class="control-label control-label col-xs-4">Senha :</label>
-                                      <div class="col-xs-8">
-                                          <input class="form-control" id="loginPassword" type="password" placeholder="Senha" ng-model="ctrl.login.password" ng-model-options="{ debounce: 250 }" required>
-                                      </div>
-                                </div>
-                                <br />
-
-                              <button type="submit" class="btn btn-primary" ng-click="ctrl.submitLogin(loginForm)">Logar</button>
-                          </form>
-                          <br />
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="panel panel-default">
-                          <form name="registerForm">
-                              <div class="form-group">
-                                  <div class="form-inline form-pair">
-                                      <label for="registerUsername" class="control-label">Nome do Usuário :</label>
-                                      <input id="registerUsername" class="form-control" type="text" placeholder="Nome" ng-model="ctrl.register.name" ng-model-options="{ debounce: 250 }" required><br/>
-                                  </div>
-                                  <div class="form-inline form-pair">
-                                      <label for="registerEmail" class="control-label">Email :</label>
-                                      <input id="registerEmail" class="form-control" type="email" placeholder="Email" ng-model="ctrl.register.email" ng-model-options="{ debounce: 250 }" required><br />
-                                  </div>
-                                  <div class="form-inline form-pair">
-                                      <label for="registerPassword" class="control-label">Senha :</label>
-                                      <input id="registerPassword" class="form-control" type="password" placeholder="Senha" ng-model="ctrl.register.password" ng-model-options="{ debounce: 250 }" required><br /><br />
-                                  </div>
-                              </div>
-                              <button type="submit" class="btn btn-primary" ng-click="ctrl.submitRegister(registerForm)">Registrar</button>
-                          </form>
-                          <br />
-                      </div>
-                  </div>
-              </div>
-              <div class="panel-footer">
-
-              </div>
-            </div>
-        </div>
+<div class="row">
+  <div class="auth-container">
+    <div class="card">
+      <div class="auth-content">
+        <p class="text-xs-center">Logue para continuar!</p>
+        <div class="alert alert-danger" ng-show="ctrl.error">{{ctrl.error}}</div>
+        <form name="loginForm" id="login-form">
+          <div class="form-group"> <label for="username">Email</label> <input id="loginEmail" type="email" class="form-control underlined" name="username" id="username" placeholder="Email"  ng-model="ctrl.login.email" ng-model-options="{ debounce: 250 }" required> </div>
+          <div class="form-group"> <label for="password">Senha</label> <input id="loginPassword" type="password" class="form-control underlined" name="password" id="password" placeholder="Senha" ng-model="ctrl.login.password" ng-model-options="{ debounce: 250 }" required> </div>
+          <div class="form-group"> <button type="submit" ng-click="ctrl.submitLogin(loginForm)" class="btn btn-block btn-primary">Logar</button> </div>
+          <div class="form-group">
+            <p class="text-muted text-xs-center">Não tem uma conta ainda? <a href="#/register">Registre-se!</a></p>
+          </div>
+        </form>
+      </div>
     </div>
+    <div class="text-xs-center">
+      <a href="#/" class="btn btn-secondary rounded btn-sm"> <i class="fa fa-arrow-left"></i> Voltar para a home</a>
+    </div>
+  </div>
+</div>

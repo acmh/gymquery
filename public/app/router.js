@@ -21,6 +21,14 @@
 					requiredLogin : false
 				}
 			})
+			.when('/register', {
+				templateUrl: 'app/Login/_register.html',
+				controller: 'registerController',
+				controllerAs: 'ctrl',
+				access: {
+					requiredLogin : false
+				}
+			})
 			.when('/newQuestion', {
 				templateUrl: 'app/Question/_newQuestion.html',
 				controller: 'newQuestionController',
