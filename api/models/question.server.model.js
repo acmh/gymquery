@@ -11,7 +11,8 @@ var QuestionSchema = new Schema({
     updated: {type: Date, default: Date.now},
     taskList: [{task:String, answer: {type:String, select: false}}],
     tags: [String],
-    tables: [{table: String, columns: [String]}]
+    tables: [{table: String, columns: [String]}],
+    user_id: String
 });
 
 QuestionSchema.plugin(mongoosePaginate);

@@ -15,7 +15,8 @@ exports.createQuestion = function(req, res, next) {
         populateScript: req.body.populate,
         author: req.body.author,
         taskList: req.body.taskList,
-        tags: req.body.tags
+        tags: req.body.tags,
+        user_id: req.decoded._id
     });
 
 
