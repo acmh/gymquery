@@ -9,6 +9,8 @@
         $routeProvider
 			.when('/', {
 				templateUrl: 'app/Home/_index.html',
+				controller: 'indexController',
+				controllerAs: 'ctrl',
 				access: {
 					requiredLogin : false
 				}

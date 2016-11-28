@@ -18,7 +18,7 @@
               <div class="col-sm-6"> <input type="password" class="form-control underlined" name="retype_password" id="retype_password" placeholder="Re-type password" ng-model="ctrl.register.retypepassword" ng-model-options="{ debounce: 250 }" required> </div>
             </div>
           </div>
-          <div class="form-group"> <button type="submit" class="btn btn-block btn-primary">Registrar-se</button> </div>
+          <div class="form-group"> <button type="submit" class="btn btn-block btn-primary" ng-click="ctrl.submitRegister(registerForm)">Registrar-se</button> </div>
           <div class="form-group">
             <p class="text-muted text-xs-center">Já tem uma conta? <a href="#/login">Logue!</a></p>
           </div>

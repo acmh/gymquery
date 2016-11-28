@@ -11,7 +11,7 @@
         var vm = this;
 
         /* Click Handlers */
-        vm.submitLogin = submitLogin;    
+        vm.submitLogin = submitLogin;
         vm.errorLogin = errorLogin;
 
 
