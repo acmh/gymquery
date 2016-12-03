@@ -20,7 +20,7 @@
             $rootScope.$on('$routeChangeSuccess', function(event, nextRoute, currentRoute) {
                 $rootScope.user = authService.getUser();
                 // if the user is already logged in, take him to the home page
-                if (authService.getLogged() && $location.path() == '/login') {
+                if (authService.getLogged() && ($location.path() == '/login' || $location.path() == '/register')) {
                     $location.path('/');
                 }
             });
