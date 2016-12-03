@@ -15,4 +15,7 @@ module.exports = function(app) {
 
 	app.route('/topratedstudent')
 		.get(users.topten);
+
+	app.route('/topratedcontributors')
+		.get(users.toptencontributors);
 };
