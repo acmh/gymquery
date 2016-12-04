@@ -12,11 +12,15 @@
 
         /* Models */
         vm.tasks = questionService.getTasks();
+        vm.active = 1;
 
         /* Click Handlers */
         vm.addTask = questionService.addTask;
-        vm.removeTask = questionService.removeTask;
+        vm.removeTask = removeTask;
         vm.submitQuestion = submitQuestion;
+
+        /* Controller methods */
+        vm.setActiveTab = setActiveTab;
 
         activate();
 
@@ -44,6 +48,19 @@
 
         function submitSuccess(res) {
             $location.url("/question/" + res.data.questionId);
+        };
+
+        function setActiveTab(tab) {
+            vm.active = tab;
+            console.log("tab == ", tab);
+        };
+
+        function removeTask(index) {
+            questionService.removeTask(index);
+            
+            if (vm.active > questionService.getTasks().length) {
+                vm.active = questionService.getTasks().length;
+            }
         };
     };
 })();

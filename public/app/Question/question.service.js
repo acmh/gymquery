@@ -39,8 +39,8 @@
             tasks.push({});
         };
 
-        function removeTask() {
-            tasks.pop();
+        function removeTask(index) {
+            tasks.splice(index, 1);
         };
 
 		function submitQuestion(form) {

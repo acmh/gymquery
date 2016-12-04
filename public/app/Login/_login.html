@@ -5,8 +5,8 @@
         <p class="text-xs-center">Logue para continuar!</p>
         <div class="alert alert-danger" ng-show="ctrl.error">{{ctrl.error}}</div>
         <form name="loginForm" id="login-form">
-          <div class="form-group"> <label for="username">Email</label> <input id="loginEmail" type="email" class="form-control underlined" name="username" id="username" placeholder="Email"  ng-model="ctrl.login.email" ng-model-options="{ debounce: 250 }" required> </div>
-          <div class="form-group"> <label for="password">Senha</label> <input id="loginPassword" type="password" class="form-control underlined" name="password" id="password" placeholder="Senha" ng-model="ctrl.login.password" ng-model-options="{ debounce: 250 }" required> </div>
+          <div class="form-group"> <label for="username">Email</label> <input id="loginEmail" type="email" class="form-control underlined" name="username" id="username" placeholder="Email"  ng-model="ctrl.login.email" ng-model-options="{ debounce: 100 }" required> </div>
+          <div class="form-group"> <label for="password">Senha</label> <input id="loginPassword" type="password" class="form-control underlined" name="password" id="password" placeholder="Senha" ng-model="ctrl.login.password" ng-model-options="{ debounce: 100 }" required> </div>
           <div class="form-group"> <button type="submit" ng-click="ctrl.submitLogin(loginForm)" class="btn btn-block btn-primary">Logar</button> </div>
           <div class="form-group">
             <p class="text-muted text-xs-center">Não tem uma conta ainda? <a href="#/register">Registre-se!</a></p>

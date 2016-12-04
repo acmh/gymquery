@@ -1,40 +1,78 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-            <div class="panel panel-default">
+        <form name="questionForm">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="card-title-block">
+                            <h3 class="title central">
+                                <b>Criar questão</b>
+                            </h3>
+                        </div>
 
-                <div class="panel-heading">
-                    <h3 class="panel-title central"><b>Criar questão</b></h3>
-                </div>
+                        <div class="central">
+                            <div class="well" style="display: inline-block">
 
-                <div class="panel-body central">
-                    <div class="well" style="display: inline-block">
-                        <form name="questionForm">
-                            <input type="text" placeholder="Título" class="form-control" ng-model="ctrl.form.title" required><br/>
-                            <textarea placeholder="Background" class="form-control" ng-model="ctrl.form.background" rows="2" cols="40" required></textarea><br />
-                            <hr>
-                            <textarea placeholder="Script de Criação" class="form-control" ng-model="ctrl.form.creation" rows="2" cols="40" required></textarea><br />
-                            <textarea placeholder="Script de Povoamento" class="form-control" ng-model="ctrl.form.population" rows="2" cols="40" required></textarea><br />
-                            <hr>
-                            <input placeholder="Tags (separadas por espaço)" class="form-control" type="text" ng-model="ctrl.form.tags" required><br/>
-                            <div class="task-list">
-                                <div ng-repeat="pair in ctrl.tasks" class="panel panel-default">
-                                    <textarea placeholder="Pergunta" class="form-control" style="display:inline" ng-model="pair.task" rows="2" cols="50" required></textarea>
-                                    <br>
-                                    <textarea placeholder="Script de Resposta" class="form-control" style="display:inline" ng-model="pair.answer" rows="2" cols="50" required></textarea>
-                                </div>
+                                <input type="text" placeholder="Título" class="form-control underlined" ng-model="ctrl.form.title" required><br/>
+                                <textarea placeholder="Background" class="form-control underlined" ng-model="ctrl.form.background" rows="2" cols="40" required></textarea><br/>
+                                <hr>
+                                <textarea placeholder="Script de Criação" class="form-control underlined" ng-model="ctrl.form.creation" rows="2" cols="40" required></textarea><br/>
+                                <textarea placeholder="Script de Povoamento" class="form-control underlined" ng-model="ctrl.form.population" rows="2" cols="40" required></textarea><br/>
+                                <hr>
+                                <input placeholder="Tags (separadas por espaço)" class="form-control underlined" type="text" ng-model="ctrl.form.tags" required><br/>
+
                             </div>
-                            <br />
-                            <button type="button" class="btn btn-primary" ng-click="ctrl.addTask()">+</button>
-                            <button type="button" class="btn btn-danger" ng-click="ctrl.removeTask()">-</button><br /><br />
-                            <hr>
-                            <button type="submit" class="btn btn-success" ng-click="ctrl.submitQuestion(questionForm)">Submeter Questão</button>
-                        </form>
+                        </div>
+
                     </div>
                 </div>
-
-                <div class="panel-footer"></div>
             </div>
-        </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="card-title-block">
+                            <h3 class="title central">
+                                <b>Perguntas e Respostas</b>
+                            </h3>
+                        </div>
+
+                        <div class="central">
+                            <div style="display: inline-block">
+                                <button type="button" class="btn btn-primary" ng-click="ctrl.addTask()">Nova Pergunta</button>
+
+                                <ul class="nav nav-tabs nav-tabs-bordered">
+                                    <li class="nav-item" ng-repeat="pair in ctrl.tasks">
+                                        <a href="" class="nav-link" data-target="#task{{$index+1}}" data-toggle="tab" role="tab"
+                                            ng-click="ctrl.setActiveTab($index+1)"
+                                            ng-class="{'active': ctrl.active === $index+1}" >
+                                            {{$index+1}}
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content tabs-bordered">
+                                    <div class="tab-pane fade" id="task{{$index+1}}"
+                                            ng-repeat="pair in ctrl.tasks"
+                                            ng-class="{'in active': ctrl.active === $index+1}" >
+                                        <textarea placeholder="Pergunta" class="form-control underlined" ng-model="pair.task" rows="2" cols="50" required></textarea>
+                                        <br />
+                                        <textarea placeholder="Script de Resposta" class="form-control underlined" ng-model="pair.answer" rows="2" cols="50" required></textarea>
+                                        <br />
+                                        <button type="button" class="btn btn-danger" ng-click="ctrl.removeTask($index)">Apagar pergunta</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-block central">
+                        <button type="submit" class="btn btn-primary" ng-click="ctrl.submitQuestion(questionForm)">Submeter Questão</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
