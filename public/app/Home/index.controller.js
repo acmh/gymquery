@@ -20,6 +20,15 @@
           }, function(response){
               //error
           });
+
+          $http.get('/topratedcontributors')
+          .then(function(response){
+              vm.topratedcontributors = response.data.data;
+          }, function(response){
+              //error
+          });
+
+
         }
 
 

@@ -17,7 +17,8 @@ var UserSchema = new Schema({
 	salt: String,
 	role: {type: Number, select: false, default: 1},
 	acc: {type: Number, default: 0},
-	tried: {type: Number, default: 0}
+	tried: {type: Number, default: 0},
+	contributions: {type: Number, default: 0}
 });
 
 UserSchema.methods.setPassword = function(password){
