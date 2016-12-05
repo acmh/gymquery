@@ -57,7 +57,7 @@
 
         function removeTask(index) {
             questionService.removeTask(index);
-            
+
             if (vm.active > questionService.getTasks().length) {
                 vm.active = questionService.getTasks().length;
             }

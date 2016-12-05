@@ -1,5 +1,5 @@
 (function() {
-    angular.module("gymqueryApp", ["ngRoute"]);
+    angular.module("gymqueryApp", ["ngRoute", "ngTagsInput"]);
 
     angular
         .module("gymqueryApp")

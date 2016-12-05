@@ -90,3 +90,7 @@ body {
 
     margin-right: auto;
 }
+
+.items-search .search-box{
+  height: 38px;
+}
