@@ -19,8 +19,8 @@
                                 <textarea placeholder="Script de Criação" class="form-control underlined" ng-model="ctrl.form.creation" rows="2" cols="40" required></textarea><br/>
                                 <textarea placeholder="Script de Povoamento" class="form-control underlined" ng-model="ctrl.form.population" rows="2" cols="40" required></textarea><br/>
                                 <hr>
-                                <input placeholder="Tags (separadas por espaço)" class="form-control underlined" type="text" ng-model="ctrl.form.tags" required><br/>
-
+                                <tags-input id="tags" placeholder="Tags" min-tags="0" max-tags="3" max-length="9" type="text" ng-model="ctrl.form.tags" required>
+                                </tags-input>
                             </div>
                         </div>
 
