@@ -13,6 +13,10 @@
         /* Models */
         vm.question = {};
         vm.error = false;
+        vm.selected = 0;
+
+        /* Button Handlers */
+        vm.selectQuestion = selectQuestion;
 
         /* Activating controller */
         activate();
@@ -31,7 +35,11 @@
         };
 
         function notFoundQuestion(res) {
+            //TODO fazer
+        };
 
+        function selectQuestion(index) {
+            vm.selected = index;
         };
     };
 })();
