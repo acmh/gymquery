@@ -7,21 +7,20 @@
                 </div>
 
                 <!-- Meta information -->
-                <h3>
-                    <small>Enviada por
-                        <i>{{::ctrl.question.author}}</i>
-                        em
-                        {{::ctrl.question.updated | date:'dd/MM/yyyy'}}
-                        às
-                        {{::ctrl.question.updated | date:'HH:mm'}}
-                        <br>
-                        Tags :
-                        <span ng-repeat="t in ::ctrl.question.tags">
-                            {{t}}
-                            <span ng-show="!$last">;</span>
-                        </span>
-                    </small>
-                </h3>
+                <h5>
+                    <i class="fa fa-user icon icon-primary"></i> {{::ctrl.question.author}}
+                    <br />
+                    <i class="fa fa-calendar-o icon icon-primary"></i>
+                    {{::ctrl.question.updated | date:'dd/MM/yyyy'}}
+                    às
+                    {{::ctrl.question.updated | date:'HH:mm'}}
+                    <br />
+                    <i class="fa fa-tags icon icon-primary"></i>
+                    <span ng-repeat="t in ::ctrl.question.tags">
+                        {{t}}
+                        <span ng-show="!$last">;</span>
+                    </span>
+                </h5>
                 <hr>
 
                 <!-- Background -->
@@ -50,7 +49,7 @@
                         <textarea placeholder="Script de Resposta" class="form-control underlined" ng-model="pair.answer" rows="2" cols="50" required></textarea>
                         <br />
                         <div class="central">
-                            <button type="button" class="btn btn-success" name="button">Submeter</button>
+                            <button type="button" class="btn btn-primary" name="button">Submeter</button>
                         </div>
                     </div>
                 </div>

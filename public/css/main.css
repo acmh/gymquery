@@ -92,5 +92,9 @@ body {
 }
 
 .items-search .search-box{
-  height: 38px;
+    height: 38px;
+}
+
+.icon-primary {
+    color: #85CE36
 }
