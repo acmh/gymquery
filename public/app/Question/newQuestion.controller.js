@@ -52,6 +52,7 @@
 
         function setActiveTab(tab) {
             vm.active = tab;
+            console.log("tab == ", tab);
         };
 
         function removeTask(index) {
