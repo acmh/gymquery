@@ -28,28 +28,16 @@ body {
     padding: 5px;
 }
 
-/* questionList view Classes */
+/* user view classes */
 
-.question-list-container {
-    margin: 5px;
-    padding: 10px;
+.user-card {
+    width: 30%;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
-.question-list-container > li {
-    display: flex;
-    justify-content: space-between;
-}
-
-.question-header {
-    display:inline-block;
-    font-size: large;
-}
-
-.question-tags {
-    color: gray;
-    margin-right: 0px;
-    display:inline-block;
-}
+/* General classes */
 
 .main-content {
     margin-top: 100px;
@@ -64,7 +52,6 @@ body {
 }
 
 .footer-custom {
-    /*clear: both;*/
     position: relative;
     width: 100%;
     height: 50px;
