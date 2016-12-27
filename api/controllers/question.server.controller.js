@@ -1,6 +1,8 @@
 var Question = require('mongoose').model('Question');
 var Database = require('../models/postgres.server.model');
 var User = require('mongoose').model('User');
+var parser = require('pg-query-parser');
+var async = require('async');
 
 exports = module.exports = {};
 
@@ -18,57 +20,60 @@ exports.createQuestion = function(req, res, next) {
         tags: req.body.tags
     });
 
+    var query_creation = parser.parse(question.creationScript);
+    var query_populate = parser.parse(question.populateScript);
+
+    var tables = [];
 
 
-    Database.getTables(req.body.creation).then(function(data){
+    if(query_creation.error == undefined && query_populate.error == undefined){
 
-        var response = {};
+      async.series([
+        function(callback){
 
-        data.forEach(function(x){
-            if(!response[x.table_name]){
-                response[x.table_name] = [];
-                response[x.table_name].push(x.column_name);
-            }else{
-                response[x.table_name].push(x.column_name);
+          for(var i = 0; i < query_creation.query.length; i++){
+
+            var columns = [];
+
+            if(query_creation.query[i].CreateStmt){
+              console.log(query_creation.query[i].CreateStmt.tableElts);
+              for(var j = 0; j < query_creation.query[i].CreateStmt.tableElts.length; j++){
+                columns.push(query_creation.query[i].CreateStmt.tableElts[j].ColumnDef.colname);
+              }
+
+              tables.push({
+                table: query_creation.query[i].CreateStmt.relation.RangeVar.relname,
+                columns: columns
+              });
             }
-        })
 
-        tables = [];
+            if(i + 1 == query_creation.query.length){
+              question.tables = tables;
+              callback();
+            }
+          }
 
-        for(var table in response){
-            tables.push({
-                table: table,
-                columns: response[table]
-            })
         }
-
-        question.tables = tables;
+      ], function(){
 
         question.save(function(err, addedQuestion) {
-            if (err) {
-                return next(err);
-            } else {
-                res.status(200).json({
-                    success:true,
-                    questionId: addedQuestion._id
-                });
-            }
-        });
+              if (err) {
+                  return next(err);
+              } else {
+                  res.status(200).json({
+                      success:true,
+                      questionId: addedQuestion._id
+                  });
+              }
+          });
+      })
+    }else{
+      res.status(500).json({
+        success: false,
+        error: "Erro de Sintaxe, verifique o seu script"
+      })
+    }
 
-    }).catch(function(error){
-
-        if(error.code == "42601"){
-            res.status(500).json({
-                success:false,
-                erro: "Syntax Error"
-            })
-        }else{
-            res.status(500).json({
-                success:false,
-                error: error
-            })
-        }
-    })
 
 
 

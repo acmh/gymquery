@@ -8,7 +8,7 @@ var SubmissionSchema = new Schema({
     code: {type: String},
     veredict: {type: String},
     questionId: {type: Schema.Types.ObjectId},
-    taskId: {type: Schema.Types.ObjectId} 
+    taskId: {type: Schema.Types.ObjectId}
 });
 
 mongoose.model('Submission', SubmissionSchema);

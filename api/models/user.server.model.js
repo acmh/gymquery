@@ -15,7 +15,7 @@ var UserSchema = new Schema({
 	},
 	password: String,
 	salt: String,
-	role: {type: Number, select: false, default: 1},
+	role: {type: Number, default: 1},
 	acc: {type: Number, default: 0},
 	tried: {type: Number, default: 0},
 	contributions: {type: Number, default: 0}
@@ -35,7 +35,6 @@ UserSchema.methods.validPassword = function(password) {
 UserSchema.methods.generateJwt = function() {
   var expiry = new Date();
   expiry.setDate(expiry.getDate() + 7);
-
   return jwt.sign({
     _id: this._id,
     email: this.email,
