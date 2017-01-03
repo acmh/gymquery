@@ -18,4 +18,7 @@ module.exports = function(app) {
 
 	app.route('/topratedcontributors')
 		.get(users.toptencontributors);
+
+	app.route('/userspaginated')
+		.get(users.usersPaginated);
 };

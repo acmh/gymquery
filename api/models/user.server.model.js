@@ -1,7 +1,8 @@
 var mongoose = require('mongoose'),
 		crypto = require('crypto'),
 		jwt = require('jsonwebtoken'),
-		Schema = mongoose.Schema;
+		Schema = mongoose.Schema,
+		mongoosePaginate = require('mongoose-paginate');
 
 var UserSchema = new Schema({
 	email: {
@@ -13,8 +14,8 @@ var UserSchema = new Schema({
 		trim: true,
 		unique: true
 	},
-	password: String,
-	salt: String,
+	password: { type:String, select: false},
+	salt: {type: String, select: false},
 	role: {type: Number, default: 1},
 	acc: {type: Number, default: 0},
 	tried: {type: Number, default: 0},
@@ -54,5 +55,5 @@ UserSchema.pre('save',
 
 		next();
 	);*/
-
+UserSchema.plugin(mongoosePaginate);
 mongoose.model('User', UserSchema);

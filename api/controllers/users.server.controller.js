@@ -151,6 +151,38 @@ exports.toptencontributors = function(req, res){
 	})
 }
 
+exports.usersPaginated = function(req, res){
+	var query = {};
+	var options = {};
+
+	options.page = req.query.page;
+	options.limit = 10;
+
+	if(req.query.name){
+			query.name = { "$regex": req.query.name };
+	}
+
+	if(req.query.sort){
+			options.sort = {"name": req.query.sort};
+	}
+
+	User.paginate(query, options, function(err, result){
+			if(err){
+					res.status(500).json({
+							message: err.message
+					});
+			}else{
+					console.log(result);
+					res.status(200).json({
+							success:true,
+							users: result
+					});
+			}
+	});
+
+
+
+}
 
 /*var getErrorMessage = function(err) {
 	var message = '';
