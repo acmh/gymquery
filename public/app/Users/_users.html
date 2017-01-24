@@ -15,10 +15,10 @@
         <div class="items-search">
             <form class="form-inline">
                 <div class="input-group">
-                    <input type="text" class="form-control boxed rounded-s search-box" placeholder="Procurar for..."
-                    ng-model="ctrl.searchInput" ng-model-options="{ debounce: 250 }">
+                    <input type="text" class="form-control boxed rounded-s search-box" placeholder="Procurar por..."
+                    ng-model="ctrl.searchInput" ng-model-options="{ debounce: 250 }" ng-keyup="$event.keyCode == 13 && ctrl.search()">
                     <span class="input-group-btn">
-                        <button class="btn btn-secondary rounded-s" type="button">
+                        <button class="btn btn-secondary rounded-s" type="button" ng-click="ctrl.search()">
                             <i class="fa fa-search"></i>
                         </button>
                     </span>
