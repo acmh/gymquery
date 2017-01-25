@@ -5,9 +5,9 @@
         .module("gymqueryApp")
 		.factory("userService", userServ);
 
-	userServ.$inject = [];
+	userServ.$inject = ["$http"];
 
-	function userServ () {
+	function userServ ($http) {
 		var service;
 
 		service = {
