@@ -159,7 +159,7 @@ exports.usersPaginated = function(req, res){
 	options.limit = 10;
 
 	if(req.query.name){
-			query.name = { "$regex": req.query.name };
+			query.name = { "$regex": req.query.name, "$options": "i" };
 	}
 
 	if(req.query.sort){
