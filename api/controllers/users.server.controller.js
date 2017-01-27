@@ -121,7 +121,6 @@ exports.topten = function(req, res){
 	})
 }
 
-
 exports.toptencontributors = function(req, res){
 	User
 	.find({role: 0})
@@ -182,6 +181,24 @@ exports.usersPaginated = function(req, res){
 
 
 
+}
+
+exports.usersById = function(req, res){
+	var user_id = req.params.id;
+
+	User.findById(user_id, function(err, user){
+		if(err){
+			res.status(500).json({
+				success: false,
+				error: err.message
+			})
+		}else{
+			res.status(200).json({
+				success: true,
+				data: user
+			})
+		}
+	})
 }
 
 /*var getErrorMessage = function(err) {

@@ -21,4 +21,7 @@ module.exports = function(app) {
 
 	app.route('/userspaginated')
 		.get(users.usersPaginated);
+
+	app.route('/users/:id')
+		.get(users.usersById);
 };
