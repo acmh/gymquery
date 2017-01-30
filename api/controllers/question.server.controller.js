@@ -80,8 +80,8 @@ exports.createQuestion = function(req, res, next) {
 };
 
 exports.questionsPaginated = function(req, res){
-
-    var query = {};
+    console.log(req.query);
+    var query = [];
     var options = {};
 
     options.page = req.query.page;
@@ -89,7 +89,7 @@ exports.questionsPaginated = function(req, res){
     options.select = "title tags author updated";
 
     if(req.query.title){
-        query.title = { "$regex": req.query.title };
+        query.push({ "title": {"$regex": req.query.title, "$options": "i"}});
     }
 
     if(req.query.sort){
@@ -97,7 +97,7 @@ exports.questionsPaginated = function(req, res){
     }
 
     if(req.query.author){
-        query.author = req.query.author;
+        query.push({"author": {"$regex": req.query.author, "$options": "i"}});
     }
 
     if(req.query.tags){
@@ -108,8 +108,7 @@ exports.questionsPaginated = function(req, res){
         query.tags = { "$in": req.query.tags};
     }
 
-
-    Question.paginate(query, options, function(err, result){
+    Question.paginate({"$or": query},options, function(err, result){
         if(err){
             res.status(500).json({
                 message: err.message
