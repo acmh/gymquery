@@ -3,7 +3,7 @@
 
     angular
         .module("gymqueryApp")
-        .controller("userController", userCtrl);
+        .controller("usersController", userCtrl);
 
     userCtrl.$inject = ["userService"];
 
@@ -20,7 +20,13 @@
         vm.getMoreUsers = getMoreUsers;
         vm.search = search;
 
-        /* Functions */
+        activate();
+
+        ///////////////////////////////
+
+        function activate() {
+            search();
+        };
 
         function getMoreUsers() {
             vm.enableGetMoreButton = false;

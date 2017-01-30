@@ -11,7 +11,8 @@
 		var service;
 
 		service = {
-			getUserList: getUserList
+			getUserList: getUserList,
+			getUser: getUser
 		};
 
 		return service;
@@ -26,5 +27,12 @@
 				}
 			});
 		};
+
+		function getUser(uid) {
+			return $http({
+				method: "GET",
+				url: "/users/" + uid
+			});
+		}
 	};
 })();

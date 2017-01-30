@@ -37,6 +37,16 @@ body {
     margin-right: 5px;
 }
 
+.aluno-header{
+    font-weight: bold;
+    color: darkblue;
+}
+
+.monitor-header{
+    font-weight: bold;
+    color: red;
+}
+
 /* General classes */
 
 .main-content {
