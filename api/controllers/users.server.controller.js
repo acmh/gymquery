@@ -1,4 +1,4 @@
-var User = require('mongoose').model('User'),
+ 	var User = require('mongoose').model('User'),
 	jwt = require('jsonwebtoken');
 
 exports = module.exports = {};
