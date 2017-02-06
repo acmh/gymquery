@@ -65,6 +65,14 @@
 			})
 			.when('/users', {
 				templateUrl: 'app/Users/_users.html',
+				controller: 'usersController',
+				controllerAs: 'ctrl',
+				access: {
+					requiredLogin : true
+				}
+			})
+			.when('/user/:uid', {
+				templateUrl: 'app/Users/_user.html',
 				controller: 'userController',
 				controllerAs: 'ctrl',
 				access: {
