@@ -37,6 +37,7 @@
         function activate() {
             questionService.getQuestionList(searchParam, 1).then(
                 function(res) {
+
                     vm.questions = res.data.questions.docs;
                     vm.pageInfo.total = res.data.questions.total;
                     vm.pageInfo.page = parseInt(res.data.questions.page);
@@ -67,6 +68,10 @@
 
             questionService.getQuestionList(searchParam, 1).then(
                 function(res) {
+                  vm.searchInput.author = "";
+                  vm.searchInput.title = "";
+                  vm.searchInput.tags = "";
+
                     vm.questions = res.data.questions.docs;
                     vm.pageInfo.total = res.data.questions.total;
                     vm.pageInfo.page = parseInt(res.data.questions.page);

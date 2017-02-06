@@ -82,6 +82,10 @@ body {
     height: 38px;
 }
 
+.dropdown-menu-custom{
+  min-width: 400px !important;
+}
+
 .icon-primary {
     color: #85CE36
 }

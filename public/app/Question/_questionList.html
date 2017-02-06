@@ -12,12 +12,34 @@
         </div>
       </div>
     </div>
-    <div class="items-search">
-      <form class="form-inline">
+    <div class="items-search row">
+      <div class="action dropdown dropdown-custom col-md-2" >
+        <button class="btn btn-primary dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" type="button">
+          <i class="fa fa-cog"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-custom" aria-labelledby="dropdownMenu1">
+          <form class="form" role="form">
+            <div class="form-group dropdown-item-custom">
+              <label for="formGroupExampleInput">Título</label>
+              <input type="text" class="form-control" ng-model="ctrl.searchInput.title" ng-model-options="{ debounce: 250 }" placeholder="Título">
+            </div>
+            <div class="form-group dropdown-item-custom">
+              <label for="contain">Autor</label>
+              <input class="form-control" ng-model="ctrl.searchInput.author" ng-model-options="{ debounce: 250 }" type="text" placeholder="Autor"/>
+            </div>
+            <div class="form-group dropdown-item-custom">
+              <label for="contain">Tags</label>
+              <input class="form-control" type="text" placeholder="Tags" ng-model="ctrl.searchInput.tags" ng-model-options="{ debounce: 250 }"/>
+            </div>
+            <button type="button" name="searchButton" ng-click="ctrl.search()" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+          </form>
+        </div>
+      </div>
+      <form class="form-inline col-md-10">
         <div class="input-group">
-          <input type="text" class="form-control boxed rounded-s search-box" placeholder="Search for...">
+          <input type="text" class="form-control boxed rounded-s search-box"  ng-model="ctrl.searchInput.title" ng-model-options="{ debounce: 250 }" placeholder="Título">
           <span class="input-group-btn">
-            <button class="btn btn-secondary rounded-s" type="button">
+            <button class="btn btn-secondary rounded-s" name="searchButton" ng-click="ctrl.search()" type="button">
               <i class="fa fa-search"></i>
             </button>
           </span>
