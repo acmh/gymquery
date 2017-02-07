@@ -36,7 +36,7 @@ exports.createQuestion = function(req, res, next) {
             var columns = [];
 
             if(query_creation.query[i].CreateStmt){
-              console.log(query_creation.query[i].CreateStmt.tableElts);
+              //console.log(query_creation.query[i].CreateStmt.tableElts);
               for(var j = 0; j < query_creation.query[i].CreateStmt.tableElts.length; j++){
                 columns.push(query_creation.query[i].CreateStmt.tableElts[j].ColumnDef.colname);
               }
@@ -114,7 +114,7 @@ exports.questionsPaginated = function(req, res){
                 message: err.message
             });
         }else{
-            
+
             res.status(200).json({
                 success:true,
                 questions: result

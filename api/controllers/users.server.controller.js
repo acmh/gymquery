@@ -5,7 +5,7 @@ exports = module.exports = {};
 
 exports.login = function(req,res){
 	var _email = req.body.email;
-	User.findOne({email: _email}, "password salt name email",  function(err, user) {
+	User.findOne({email: _email}, "password salt name email role",  function(err, user) {
 		if(err){
 			res.status(404).json(err);
 			return;

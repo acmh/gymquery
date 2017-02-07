@@ -34,7 +34,7 @@ UserSchema.methods.validPassword = function(password) {
 
 //Generate a token with some extra informations (like expire time)
 UserSchema.methods.generateJwt = function() {
-  var expiry = new Date();
+	var expiry = new Date();
   expiry.setDate(expiry.getDate() + 7);
   return jwt.sign({
     _id: this._id,
