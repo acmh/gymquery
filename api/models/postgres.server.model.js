@@ -26,7 +26,7 @@ exports.db = function getDb(){
     return exports.__pool || (exports.__pool = pgp(config));
 }
 
-exports.getTables = function(queryString){
+/*exports.getTables = function(queryString){
     var db = exports.db();
 
     var idx = 0;
@@ -73,7 +73,7 @@ exports.getTables = function(queryString){
                 return t.any(f);
             })
         })
-}
+}*/
 
 exports.getQuestionVeredict = function(creationScript, populateScript, taskList, answer){
     var db = exports.db();

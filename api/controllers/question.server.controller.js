@@ -25,7 +25,6 @@ exports.createQuestion = function(req, res, next) {
 
     var tables = [];
 
-
     if(query_creation.error == undefined && query_populate.error == undefined){
 
       async.series([
@@ -60,10 +59,19 @@ exports.createQuestion = function(req, res, next) {
               if (err) {
                   return next(err);
               } else {
-                  res.status(200).json({
-                      success:true,
-                      questionId: addedQuestion._id
-                  });
+                User.findOneAndUpdate({email: req.decoded.email}, {"$inc": {"contributions": 1}} ,function(err){
+                  if(err){
+                    res.status(500).json({
+                      success: false,
+                      error: err.message
+                    })
+                  }else{
+                    res.status(200).json({
+                        success:true,
+                        questionId: addedQuestion._id
+                    });
+                  }
+                });
               }
           });
       })
