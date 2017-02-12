@@ -40,7 +40,7 @@
                     <hr>
                     <div class="row" style="margin: 5px;">
                         <div class="col-md-3 well central">
-                            <span style="cursor: pointer" ng-class="$index == ctrl.selected ? 'text-muted' : 'text-primary'" ng-repeat="t in ::ctrl.question.taskList" ng-click="ctrl.selectQuestion($index)">
+                            <span style="cursor: pointer" ng-class="$index == ctrl.selected ? 'text-success' : 'text-muted'" ng-repeat="t in ::ctrl.question.taskList" ng-click="ctrl.selectQuestion($index)">
                                 <b> Pergunta {{::$index+1}} </b>
                                 <br />
                             </span>
@@ -48,10 +48,14 @@
                         <div class="col-md-offset-1 col-md-8 well">
                             <span class="lead">{{ctrl.question.taskList[ctrl.selected].task}}</span>
                             <hr>
-                            <textarea placeholder="Script de Resposta" class="form-control underlined" ng-model="pair.answer" rows="2" cols="50" required></textarea>
-                            <br />
+                            <div class="ace-editor-style" ui-ace="{
+                                theme: 'sqlserver',
+                                mode: 'sql'
+                            }" ng-model="ctrl.answerEditor" ng-model-options="{ debounce: 200 }">
+                            </div>
+                            <hr>
                             <div class="central">
-                                <button type="button" class="btn btn-primary" name="button">Submeter</button>
+                                <button type="button" class="btn btn-primary" name="button" ng-click="ctrl.openSubmitModal()">Submeter</button>
                             </div>
                         </div>
                     </div>

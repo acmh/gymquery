@@ -5,18 +5,20 @@
         .module("gymqueryApp")
         .controller("questionController", questionCtrl);
 
-    questionCtrl.$inject = ["questionService", "$routeParams"];
+    questionCtrl.$inject = ["questionService", "$routeParams", "$uibModal"];
 
-    function questionCtrl (questionService, $routeParams) {
+    function questionCtrl (questionService, $routeParams, $uibModal) {
         var vm = this;
 
         /* Models */
         vm.question = {};
         vm.error = false;
         vm.selected = 0;
+        vm.answerEditor = "";
 
         /* Button Handlers */
         vm.selectQuestion = selectQuestion;
+        vm.openSubmitModal = openSubmitModal;
 
         /* Activating controller */
         activate();
@@ -40,6 +42,45 @@
 
         function selectQuestion(index) {
             vm.selected = index;
+            vm.answerEditor = "";
         };
+
+        function openSubmitModal() {
+            let modal = $uibModal.open({
+                controller: 'modalSubmitController',
+                controllerAs: 'modalCtrl',
+                templateUrl: 'app/Question/modalSubmitTemplate.html',
+                resolve: {
+                    answer: () => {return vm.answerEditor;} ,
+                    task: () => {return vm.question.taskList[vm.selected].task;}
+                }
+            });
+
+            modal.result.then(
+                () => {
+                    console.log("sucesso");
+                },
+                () => {
+                    console.log("cancelou");
+                }
+            );
+        }
+    };
+
+    /* Controller da modal */
+
+    angular
+        .module('gymqueryApp')
+        .controller('modalSubmitController', modalCtrl);
+
+    modalCtrl.inject = ["$uibModalInstance"];
+
+    function modalCtrl ($uibModalInstance, answer, task) {
+        var vm = this;
+        vm.answer = answer;
+        vm.task = task;
+
+        vm.ok = () => $uibModalInstance.close();
+        vm.cancel = () => $uibModalInstance.dismiss();
     };
 })();
