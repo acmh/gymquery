@@ -55,11 +55,9 @@
         };
 
         function removeTask(index) {
-            questionService.removeTask(index);
+            vm.active = 0;
 
-            if (vm.active > questionService.getTasks().length) {
-                vm.active = questionService.getTasks().length;
-            }
+            questionService.removeTask(index-1);
         };
     };
 })();

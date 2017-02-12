@@ -76,6 +76,11 @@ body {
     height: 200px;
 }
 
+.ace-editor-style-sm {
+    width: 100%;
+    height: 100px;
+}
+
 .footer-block-custom {
     padding: 7px 20px;
 }
