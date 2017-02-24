@@ -8,25 +8,13 @@
     newQuestionCtrl.$inject = ["questionService", "$location"];
 
     function newQuestionCtrl (questionService, $location) {
-        var vm = this;
+        let vm = this;
 
         /* Models */
-        vm.tasks = questionService.getTasks();
-        vm.active = 1;
+        vm.tasks = [{}];
+        vm.active = 0;
 
-        /* Click Handlers */
-        vm.addTask = questionService.addTask;
-        vm.removeTask = removeTask;
-        vm.submitQuestion = submitQuestion;
-
-        /* Controller methods */
-        vm.setActiveTab = setActiveTab;
-
-        activate();
-
-        ////////////////////////////////
-
-        function activate() {
+        let activate = () => {
             vm.form = {
                 title: "",
                 creation: "",
@@ -36,28 +24,33 @@
             };
         };
 
-        function submitQuestion(questionForm) {
+        ////////////////////////////////
+
+        activate();
+
+        vm.submitQuestion = (questionForm) => {
             if (!questionForm.$valid) { return; }
 
-            questionService.submitQuestion(vm.form).then(
-                submitSuccess
+            questionService.submitQuestion(vm.form, vm.tasks).then(
+                (res) => {
+                    $location.url("/question/" + res.data.questionId);
+                }
             );
 
             //TODO: error callback
         };
 
-        function submitSuccess(res) {
-            $location.url("/question/" + res.data.questionId);
+        vm.addTask = () => {
+            vm.tasks.push({});
         };
 
-        function setActiveTab(tab) {
-            vm.active = tab;
+        vm.removeTask = () => {
+            vm.tasks.splice(vm.active, 1);
         };
 
-        function removeTask(index) {
-            vm.active = 0;
-
-            questionService.removeTask(index-1);
+        vm.selectTab = (index) => {
+            vm.active = index;
         };
+
     };
 })();

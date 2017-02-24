@@ -9,13 +9,9 @@
 
 	function questionServ ($http, authService) {
         var service;
-        var tasks = [{}];
 
         service = {
 			// Add Question Functions
-            getTasks: getTasks,
-            addTask : addTask,
-            removeTask : removeTask,
 			submitQuestion : submitQuestion,
 
 			// Question List Functions
@@ -31,19 +27,7 @@
 		// Add Question Functions  //
 		/////////////////////////////
 
-        function getTasks() {
-            return tasks;
-        };
-
-        function addTask() {
-            tasks.push({});
-        };
-
-        function removeTask(index) {
-            tasks.splice(index, 1);
-        };
-
-		function submitQuestion(form) {
+		function submitQuestion(form, tasks) {
 			return $http({
 				method: "POST",
 				url: "/questions",

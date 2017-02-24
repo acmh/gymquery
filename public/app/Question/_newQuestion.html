@@ -13,10 +13,10 @@
                         <div>
                             <div class="well" style="display: inline-block; width: 100%;">
                                 <label class="control-label">Título</label>
-                                <input type="text" class="form-control underlined" ng-model="ctrl.form.title" required><br/>
+                                <input type="text" class="form-control boxed" ng-model="ctrl.form.title" required><br/>
 
                                 <label class="control-label">Background</label>
-                                <textarea class="form-control underlined" ng-model="ctrl.form.background" rows="2" cols="40" required></textarea><br/>
+                                <textarea class="form-control boxed" ng-model="ctrl.form.background" rows="2" cols="40" required></textarea><br/>
 
                                 <label class="control-label">Script de Criação</label>
                                 <div class="ace-editor-style-sm" ui-ace="{
@@ -49,11 +49,35 @@
                                 <b>Perguntas e Respostas</b>
                             </h3>
                         </div>
-                        <hr>
-                        <div class="central">
-                            <div style="display: inline-block">
-                                    <button type="button" class="btn btn-primary" ng-click="ctrl.addTask()">Nova Pergunta</button>
 
+                        <div class="central well">
+                            <div style="display: inline-block; width: 100%;">
+                                <button type="button" class="btn btn-primary" ng-click="ctrl.addTask()">Nova Pergunta</button>
+
+                                <hr />
+                                <uib-accordion>
+                                    <div uib-accordion-group heading="Pergunta {{$index + 1}}"
+                                        class="panel-default"
+                                        ng-repeat="pair in ctrl.tasks"
+                                        ng-click="ctrl.selectTab($index)">
+                                            <label class="control-label">Pergunta </label>
+                                            <textarea class="form-control boxed" ng-model="pair.task" rows="2" cols="50" required></textarea>
+                                            <br />
+                                            <label class="control-label">Script de Resposta </label>
+                                            <div class="ace-editor-style-sm" ui-ace="{
+                                                theme: 'sqlserver',
+                                                mode: 'sql'
+                                            }" ng-model="pair.answer" ng-model-options="{ debounce: 200 }">
+                                            </div>
+                                            <br />
+                                            <button type="button" class="btn btn-danger"
+                                                    ng-click="ctrl.removeTask()"
+                                                    ng-show="$index == ctrl.active && ctrl.tasks.length > 1">
+                                                        Remover Pergunta
+                                            </button>
+                                    </div>
+                                </uib-accordion>
+                                <!--
                                 <ul class="nav nav-tabs nav-tabs-bordered">
                                     <li class="nav-item" ng-repeat="pair in ctrl.tasks">
                                         <a href="" class="nav-link" data-target="#task{{$index+1}}" data-toggle="tab" role="tab"
@@ -64,7 +88,6 @@
                                     </li>
                                 </ul>
 
-                                <!-- Tab panes -->
                                 <div class="tab-content tabs-bordered">
                                     <div style="text-align: left" class="tab-pane fade" id="task{{$index+1}}"
                                             ng-repeat="pair in ctrl.tasks"
@@ -82,7 +105,7 @@
                                     </div>
                                 </div>
                                 <br>
-                                <button type="button" class="btn btn-danger" ng-click="ctrl.removeTask(ctrl.active)" ng-show="ctrl.tasks.length > 1 && ctrl.active > 0">Remover Pergunta {{ctrl.active}}</button>
+                                -->
                             </div>
                         </div>
 
