@@ -49,7 +49,7 @@
             let modal = $uibModal.open({
                 controller: 'modalSubmitController',
                 controllerAs: 'modalCtrl',
-                templateUrl: 'app/Question/modalSubmitTemplate.html',
+                templateUrl: 'app/Question/modalSubmitAnswer.html',
                 resolve: {
                     answer: () => {return vm.answerEditor;} ,
                     task: () => {return vm.question.taskList[vm.selected].task;}
@@ -81,5 +81,8 @@
 
         vm.ok = () => $uibModalInstance.close();
         vm.cancel = () => $uibModalInstance.dismiss();
+        vm.readOnly = (_editor) => {
+            _editor.setReadOnly(true);
+        }
     };
 })();

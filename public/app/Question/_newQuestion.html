@@ -4,6 +4,18 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-block">
+                        <div  style="display: flex; justify-content: space-around;" >
+                            <button type="submit" class="btn btn-success" ng-click="ctrl.submitQuestion(questionForm)">
+                                <i class="fa fa-check"></i> Finalizar Cadastro
+                            </button>
+                            <button type="button" class="btn btn-primary" ng-click="ctrl.openNewTaskModal()">
+                                <i class="fa fa-plus"></i> Nova Pergunta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-block">
                         <div class="card-title-block">
                             <h3 class="title central">
                                 <b>Criar questão</b>
@@ -42,78 +54,23 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="card">
+                <div class="card" ng-repeat="pair in ctrl.tasks">
                     <div class="card-block">
-                        <div class="card-title-block">
-                            <h3 class="title central">
-                                <b>Perguntas e Respostas</b>
-                            </h3>
-                        </div>
-
-                        <div class="central well">
-                            <div style="display: inline-block; width: 100%;">
-                                <button type="button" class="btn btn-primary" ng-click="ctrl.addTask()">Nova Pergunta</button>
-
-                                <hr />
-                                <uib-accordion>
-                                    <div uib-accordion-group heading="Pergunta {{$index + 1}}"
-                                        class="panel-default"
-                                        ng-repeat="pair in ctrl.tasks"
-                                        ng-click="ctrl.selectTab($index)">
-                                            <label class="control-label">Pergunta </label>
-                                            <textarea class="form-control boxed" ng-model="pair.task" rows="2" cols="50" required></textarea>
-                                            <br />
-                                            <label class="control-label">Script de Resposta </label>
-                                            <div class="ace-editor-style-sm" ui-ace="{
-                                                theme: 'sqlserver',
-                                                mode: 'sql'
-                                            }" ng-model="pair.answer" ng-model-options="{ debounce: 200 }">
-                                            </div>
-                                            <br />
-                                            <button type="button" class="btn btn-danger"
-                                                    ng-click="ctrl.removeTask()"
-                                                    ng-show="$index == ctrl.active && ctrl.tasks.length > 1">
-                                                        Remover Pergunta
-                                            </button>
-                                    </div>
-                                </uib-accordion>
-                                <!--
-                                <ul class="nav nav-tabs nav-tabs-bordered">
-                                    <li class="nav-item" ng-repeat="pair in ctrl.tasks">
-                                        <a href="" class="nav-link" data-target="#task{{$index+1}}" data-toggle="tab" role="tab"
-                                            ng-click="ctrl.setActiveTab($index+1)"
-                                            ng-class="{'active': ctrl.active === $index+1}" >
-                                            {{$index+1}}
-                                        </a>
-                                    </li>
-                                </ul>
-
-                                <div class="tab-content tabs-bordered">
-                                    <div style="text-align: left" class="tab-pane fade" id="task{{$index+1}}"
-                                            ng-repeat="pair in ctrl.tasks"
-                                            ng-class="{'in active': ctrl.active === $index+1}" >
-                                        <label class="control-label">Pergunta </label>
-                                        <textarea class="form-control underlined" ng-model="pair.task" rows="2" cols="50" required></textarea>
-                                        <br />
-                                        <label class="control-label">Script de Resposta </label>
-                                        <div class="ace-editor-style-sm" ui-ace="{
-                                            theme: 'sqlserver',
-                                            mode: 'sql'
-                                        }" ng-model="pair.answer" ng-model-options="{ debounce: 200 }">
-                                        </div>
-                                        <br />
-                                    </div>
-                                </div>
-                                <br>
-                                -->
+                        <div class="card-title">
+                            <div class="title central">
+                                <b>Pergunta {{$index + 1}} - </b>
+                                <button type="button" class="btn btn-danger btn-sm " ng-click="ctrl.removeTask($index)">Remover</button>
                             </div>
                         </div>
 
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-block central">
-                        <button type="submit" class="btn btn-primary" ng-click="ctrl.submitQuestion(questionForm)">Submeter Questão</button>
+                        <pre class="well">{{pair.task}}</pre>
+                        <div class="ace-editor-style-sm" ui-ace="{
+                            theme: 'sqlserver',
+                            mode: 'sql',
+                            onLoad: ctrl.readOnly
+                        }" ng-model="pair.answer" ng-model-options="{ debounce: 200 }">
+                        </div>
+
                     </div>
                 </div>
             </div>
