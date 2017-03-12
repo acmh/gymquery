@@ -58,10 +58,9 @@
 
             modal.result.then(
                 () => {
-                    console.log("sucesso");
+                    console.log("Enviar");
                 },
                 () => {
-                    console.log("cancelou");
                 }
             );
         }
