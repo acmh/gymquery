@@ -2,6 +2,21 @@
     <div class="row">
         <form name="questionForm">
             <div class="col-lg-6">
+                <div uib-alert class="alert-danger" ng-if="ctrl.errorMsg != ''" dismiss-on-timeout="3000" close="ctrl.closeAlert()">
+                    {{ctrl.errorMsg}}
+                </div>
+                <div class="card">
+                    <div class="card-block">
+                        <div  style="display: flex; justify-content: space-around;" >
+                            <button type="submit" class="btn btn-success" ng-click="ctrl.openNewQuestionModal(questionForm)">
+                                <i class="fa fa-check"></i> Finalizar Cadastro
+                            </button>
+                            <button type="button" class="btn btn-primary" ng-click="ctrl.openNewTaskModal()">
+                                <i class="fa fa-plus"></i> Nova Pergunta
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card-block">
                         <div class="card-title-block">
@@ -10,66 +25,54 @@
                             </h3>
                         </div>
 
-                        <div class="central">
-                            <div class="well" style="display: inline-block">
+                        <div>
+                            <div class="well" style="display: inline-block; width: 100%;">
+                                <label class="control-label">Título</label>
+                                <input type="text" class="form-control boxed" ng-model="ctrl.form.title" required><br/>
 
-                                <input type="text" placeholder="Título" class="form-control underlined" ng-model="ctrl.form.title" required><br/>
-                                <textarea placeholder="Background" class="form-control underlined" ng-model="ctrl.form.background" rows="2" cols="40" required></textarea><br/>
-                                <hr>
-                                <textarea placeholder="Script de Criação" class="form-control underlined" ng-model="ctrl.form.creation" rows="2" cols="40" required></textarea><br/>
-                                <textarea placeholder="Script de Povoamento" class="form-control underlined" ng-model="ctrl.form.population" rows="2" cols="40" required></textarea><br/>
+                                <label class="control-label">Background</label>
+                                <textarea class="form-control boxed" ng-model="ctrl.form.background" rows="2" cols="40" required></textarea><br/>
+
+                                <label class="control-label">Script de Criação</label>
+                                <div class="ace-editor-style-sm" ui-ace="{
+                                    theme: 'sqlserver',
+                                    mode: 'sql'
+                                }" ng-model="ctrl.form.creation" ng-model-options="{ debounce: 200 }">
+                                </div>
+                                <br />
+
+                                <label class="control-label">Script de População</label>
+                                <div class="ace-editor-style-sm" ui-ace="{
+                                    theme: 'sqlserver',
+                                    mode: 'sql'
+                                }" ng-model="ctrl.form.population" ng-model-options="{ debounce: 200 }">
+                                </div>
                                 <hr>
                                 <tags-input id="tags" placeholder="Tags" min-tags="0" max-tags="3" max-length="9" type="text" ng-model="ctrl.form.tags" required>
                                 </tags-input>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="card">
+                <div class="card" ng-repeat="pair in ctrl.tasks">
                     <div class="card-block">
-                        <div class="card-title-block">
-                            <h3 class="title central">
-                                <b>Perguntas e Respostas</b>
-                            </h3>
-                        </div>
-
-                        <div class="central">
-                            <div style="display: inline-block">
-                                <button type="button" class="btn btn-primary" ng-click="ctrl.addTask()">Nova Pergunta</button>
-
-                                <ul class="nav nav-tabs nav-tabs-bordered">
-                                    <li class="nav-item" ng-repeat="pair in ctrl.tasks">
-                                        <a href="" class="nav-link" data-target="#task{{$index+1}}" data-toggle="tab" role="tab"
-                                            ng-click="ctrl.setActiveTab($index+1)"
-                                            ng-class="{'active': ctrl.active === $index+1}" >
-                                            {{$index+1}}
-                                        </a>
-                                    </li>
-                                </ul>
-
-                                <!-- Tab panes -->
-                                <div class="tab-content tabs-bordered">
-                                    <div class="tab-pane fade" id="task{{$index+1}}"
-                                            ng-repeat="pair in ctrl.tasks"
-                                            ng-class="{'in active': ctrl.active === $index+1}" >
-                                        <textarea placeholder="Pergunta" class="form-control underlined" ng-model="pair.task" rows="2" cols="50" required></textarea>
-                                        <br />
-                                        <textarea placeholder="Script de Resposta" class="form-control underlined" ng-model="pair.answer" rows="2" cols="50" required></textarea>
-                                        <br />
-                                        <button type="button" class="btn btn-danger" ng-click="ctrl.removeTask($index)">Apagar pergunta</button>
-                                    </div>
-                                </div>
+                        <div class="card-title">
+                            <div class="title central">
+                                <b>Pergunta {{$index + 1}} - </b>
+                                <button type="button" class="btn btn-danger btn-sm " ng-click="ctrl.removeTask($index)">Remover</button>
                             </div>
                         </div>
 
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-block central">
-                        <button type="submit" class="btn btn-primary" ng-click="ctrl.submitQuestion(questionForm)">Submeter Questão</button>
+                        <div class="well">{{pair.task}}</div>
+                        <div class="ace-editor-style-sm" ui-ace="{
+                            theme: 'sqlserver',
+                            mode: 'sql',
+                            onLoad: ctrl.readOnly
+                        }" ng-model="pair.answer" ng-model-options="{ debounce: 200 }">
+                        </div>
+
                     </div>
                 </div>
             </div>

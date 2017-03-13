@@ -16,7 +16,6 @@
           $http.get('/topratedstudent')
           .then(function(response){
               vm.toprated = response.data.data;
-              console.log(vm.toprated);
           }, function(response){
               //error
           });

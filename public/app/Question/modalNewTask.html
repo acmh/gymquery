@@ -1,0 +1,24 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Nova Pergunta</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <div class="central">
+        <label class="control-label">Pergunta </label>
+        <textarea class="form-control boxed" ng-model="modalCtrl.pair.task" rows="2" cols="50"></textarea>
+        <br />
+        <label class="control-label">Script de Resposta </label>
+        <div class="ace-editor-style-sm" ui-ace="{
+            theme: 'sqlserver',
+            mode: 'sql'
+        }" ng-model="modalCtrl.pair.answer" ng-model-options="{ debounce: 200 }">
+        </div>
+    </div>
+    <br />
+    <div uib-alert class="alert-danger" ng-if="modalCtrl.error" dismiss-on-timeout="3000" close="modalCtrl.closeAlert()">
+        Ambos os campos são obrigatórios!
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="modalCtrl.cancel()"><i class="fa fa-close"></i> Cancelar</button>
+    <button class="btn btn-primary" type="button" ng-click="modalCtrl.ok()"><i class="fa fa-check"></i> Confirmar</button>
+</div>

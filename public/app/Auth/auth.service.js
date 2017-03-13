@@ -72,6 +72,7 @@
 			$window.sessionStorage.token = res.data.token;
 
 			isLogged = true;
+			$http.defaults.headers.common['x-access-token'] = token;
 
 			$location.path("/");
 		};
