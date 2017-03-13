@@ -10,6 +10,6 @@ module.exports = function(app){
 
     var mArray = [question.getQuestionById];
 
-    app.route('/question/:id').get(mArray,question.question).post([authorization.allowStudent],question.answer);
+    app.route('/question/:id').get(mArray,question.question).post(question.answer);
 
 };

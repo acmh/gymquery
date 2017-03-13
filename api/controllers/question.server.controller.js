@@ -177,49 +177,51 @@ exports.answer = function(req, res){
         }else{
             var taskList;
 
+            //Pego o taskList escolhido pelo usuario
             for(var i = 0; i < question.taskList.length; i++){
                 if(taskID == question.taskList[i]._id){
                     taskList = question.taskList[i];
                 }
             }
 
-            Database.getQuestionVeredict(question.creationScript, question.populateScript, taskList, answer).then(function(result){
-                var veredict = JSON.stringify(result[0]) === JSON.stringify(result[1])
-                if(veredict){
-                  User.findOneAndUpdate({email: req.decoded.email}, {"$inc": {"acc": 1}} ,function(err){
-                    if(err){
-                      res.status(500).json({
-                        success: false,
-                        error: err.message
-                      })
-                    }
-                  });
-                  res.status(200).json({
-                      message: "Correct Answer",
-                      success: true
-                  });
-                }else{
-                  User.findOneAndUpdate({email: req.decoded.email}, {"$inc": {"tried": 1}} ,function(err){
-                    if(err){
-                      res.status(500).json({
-                        success: false,
-                        error: err.message
-                      })
-                    }
-                  });
-
-                  res.status(200).json({
-                      message: "Wrong Answer",
-                      success: true
-                  })
-                }
-            }).catch(function(error){
-                res.status(500).json({
-                    success:false,
-                    error: error
-                })
-            })
-
-        }
-    })
-}
+            Database.getQuestionVeredict(question.creationScript, question.populateScript, taskList, answer);
+    //         .then(function(result){
+    //             var veredict = JSON.stringify(result[0]) === JSON.stringify(result[1])
+    //             if(veredict){
+    //               User.findOneAndUpdate({email: req.decoded.email}, {"$inc": {"acc": 1}} ,function(err){
+    //                 if(err){
+    //                   res.status(500).json({
+    //                     success: false,
+    //                     error: err.message
+    //                   })
+    //                 }
+    //               });
+    //               res.status(200).json({
+    //                   message: "Correct Answer",
+    //                   success: true
+    //               });
+    //             }else{
+    //               User.findOneAndUpdate({email: req.decoded.email}, {"$inc": {"tried": 1}} ,function(err){
+    //                 if(err){
+    //                   res.status(500).json({
+    //                     success: false,
+    //                     error: err.message
+    //                   })
+    //                 }
+    //               });
+    //
+    //               res.status(200).json({
+    //                   message: "Wrong Answer",
+    //                   success: true
+    //               })
+    //             }
+    //         }).catch(function(error){
+    //             res.status(500).json({
+    //                 success:false,
+    //                 error: error
+    //             })
+    //         })
+    //
+         }
+     })
+  }

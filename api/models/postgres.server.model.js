@@ -5,6 +5,7 @@ var pgp = require('pg-promise')({
     }
 });
 var Question = require('mongoose').model('Question');
+var parser = require('pg-query-parser');
 
 var config = {
   user: 'postgres',
@@ -77,13 +78,33 @@ exports.db = function getDb(){
 
 exports.getQuestionVeredict = function(creationScript, populateScript, taskList, answer){
     var db = exports.db();
-
+    //console.log(answer);
     var queries = [];
+    //console.log(parser.parse(creationScript).query[0].CreateStmt.relation.RangeVar.relpersistence);
+    //creationScript = creationScript.split(';');
+    //populateScript = populateScript.split(';');
+    parser.deparse(parser.parse("CREATE TABLE COMPANY(ID INT PRIMARY KEY     NOT NULL,    NAME           TEXT    NOT NULL,    AGE            INT     NOT NULL,    ADDRESS        CHAR(50),    SALARY         REAL );").query);
+    var ansObj = parser.parse(answer);
+    var creObj = parser.parse(creationScript);
+    var popOjb = parser.parse(populateScript);
 
-    creationScript = creationScript.split(';');
-    populateScript = populateScript.split(';');
+    if(ansObj.error == undefined && creObj.error == undefined && popOjb.error == undefined){
 
-    creationScript.forEach(function(query){
+      //Adiciona o campo temporary as tabelas
+      for(var i = 0; i < creObj.query.length; i++){
+        creObj.query[i].CreateStmt.relation.RangeVar.relpersistence = 't';
+      }
+
+      //console.log(parser.deparse(creObj.query));
+
+    }else{
+      res.status(500).json({
+        success: false,
+        error: "Verifique a sintaxe da sua resposta"
+      })
+    }
+
+    /*creationScript.forEach(function(query){
         query = query.toLowerCase();
         if(idx = query.indexOf("create") > -1){
             //No final da transação espera-se que a tabela tenha sido deletada
@@ -119,6 +140,6 @@ exports.getQuestionVeredict = function(creationScript, populateScript, taskList,
         )
         return this.batch(queries);
 
-    })
+    })*/
 
 }
