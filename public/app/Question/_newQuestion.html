@@ -2,10 +2,13 @@
     <div class="row">
         <form name="questionForm">
             <div class="col-lg-6">
+                <div uib-alert class="alert-danger" ng-if="ctrl.errorMsg != ''" dismiss-on-timeout="3000" close="ctrl.closeAlert()">
+                    {{ctrl.errorMsg}}
+                </div>
                 <div class="card">
                     <div class="card-block">
                         <div  style="display: flex; justify-content: space-around;" >
-                            <button type="submit" class="btn btn-success" ng-click="ctrl.submitQuestion(questionForm)">
+                            <button type="submit" class="btn btn-success" ng-click="ctrl.openNewQuestionModal(questionForm)">
                                 <i class="fa fa-check"></i> Finalizar Cadastro
                             </button>
                             <button type="button" class="btn btn-primary" ng-click="ctrl.openNewTaskModal()">
@@ -49,7 +52,6 @@
                                 </tags-input>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -63,7 +65,7 @@
                             </div>
                         </div>
 
-                        <pre class="well">{{pair.task}}</pre>
+                        <div class="well">{{pair.task}}</div>
                         <div class="ace-editor-style-sm" ui-ace="{
                             theme: 'sqlserver',
                             mode: 'sql',

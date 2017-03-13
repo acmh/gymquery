@@ -36,7 +36,7 @@
 					creationScript: form.creation,
 					populateScript: form.population,
 					background: form.background,
-					tags: form.tags.split(" ").filter(((v, i, a) => a.indexOf(v) === i)),
+					tags: form.tags,
 					author: authService.getUser(),
 					taskList: tasks
 				}

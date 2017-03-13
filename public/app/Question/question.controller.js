@@ -81,8 +81,6 @@
 
         vm.ok = () => $uibModalInstance.close();
         vm.cancel = () => $uibModalInstance.dismiss();
-        vm.readOnly = (_editor) => {
-            _editor.setReadOnly(true);
-        }
+        vm.readOnly = (_editor) => _editor.setReadOnly(true);
     };
 })();
