@@ -1,14 +1,14 @@
 var users = require('../../api/controllers/users.server.controller'),
 	passport = require('passport');
 var jwt = require('jsonwebtoken');
-
+var maybePass = require('../../api/middleware/permissions').maybePass;
 
 
 
 module.exports = function(app) {
 
 	app.route('/register')
-		.post(users.register);
+		.post(maybePass,users.register);
 
 	app.route('/login')
 		.post(users.login);

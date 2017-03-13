@@ -21,6 +21,7 @@
   "bugs": {},
   "homepage": "",
   "dependencies": {
+    "acl": "^0.4.10",
     "async": "^2.1.4",
     "body-parser": "~1.15.2",
     "connect-flash": "~0.1.1",
@@ -42,6 +43,7 @@
     "pg": "^6.1.0",
     "pg-promise": "^5.3.5",
     "pg-query-parser": "^0.2.1",
+    "redis": "^2.7.0",
     "serve-favicon": "~2.3.0",
     "underscore": "^1.8.3"
   }
