@@ -7,21 +7,21 @@ var maybePass = require('../../api/middleware/permissions').maybePass;
 
 module.exports = function(app) {
 
-	app.route('/register')
+	app.route('/usuario/registrar')
 		.post(maybePass,users.register);
 
-	app.route('/login')
+	app.route('/usuario/login')
 		.post(users.login);
 
-	app.route('/topratedstudent')
+	app.route('/usuario/estudante/rank')
 		.get(users.topten);
 
-	app.route('/topratedcontributors')
+	app.route('/usuario/contribuidores/rank')
 		.get(users.toptencontributors);
 
-	app.route('/userspaginated')
+	app.route('/usuario/listar')
 		.get(users.usersPaginated);
 
-	app.route('/users/:id')
+	app.route('/usuario/:id')
 		.get(users.usersById);
 };
