@@ -39,7 +39,7 @@ function set_roles(acl) {
             allows: [
               //Perceba que register eh post, logo o guest nunca ira poder se registrar
               //mas se mudarmos para post ele conseguera
-              { resources: '/register', permissions: 'get'},
+              { resources: '/usuario/registrar', permissions: 'get'}
               //{ resources: '/home', permissions: 'get'}
             ]
         }
