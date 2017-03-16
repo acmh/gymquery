@@ -24,6 +24,13 @@
         }
 
         function submitRegister(registerForm) {
+            if (vm.register.password !== vm.register.retypepassword) {
+                vm.error="Erro! Senhas diferentes!"
+                $timeout(3000).then(function() {
+                    vm.error = false;
+                });
+            }
+            
             if (!registerForm.$valid) { return; }
 
             authService.register(vm.register).then(

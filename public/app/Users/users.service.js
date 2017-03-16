@@ -20,7 +20,7 @@
 		function getUserList(search, page) {
 			return $http({
 				method: "GET",
-				url: "/usersPaginated",
+				url: "/usuario/listar",
 				params: {
 					name: search.name,
 					page: page
@@ -31,7 +31,7 @@
 		function getUser(uid) {
 			return $http({
 				method: "GET",
-				url: "/users/" + uid
+				url: "/usuario/" + uid
 			});
 		}
 	};

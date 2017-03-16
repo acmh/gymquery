@@ -8,14 +8,13 @@
           <div class="form-group"> <label for="firstname">Nome</label>
             <div class="row">
               <div class="col-sm-12"> <input type="text" class="form-control underlined" name="firstname" id="firstname" placeholder="Nome" ng-model="ctrl.register.name" ng-model-options="{ debounce: 100 }" required=""> </div>
-              <!-- <div class="col-sm-6"> <input type="text" class="form-control underlined" name="lastname" id="lastname" placeholder="Enter lastname" required=""> </div> -->
             </div>
           </div>
-          <div class="form-group"> <label for="email">Email</label> <input type="email" class="form-control underlined" name="email" id="email" placeholder="Enter email address" ng-model="ctrl.register.email" ng-model-options="{ debounce: 100 }" required> </div>
-          <div class="form-group"> <label for="password">Password</label>
+          <div class="form-group"> <label for="email">Email</label> <input type="email" class="form-control underlined" name="email" id="email" placeholder="Email" ng-model="ctrl.register.email" ng-model-options="{ debounce: 100 }" required> </div>
+          <div class="form-group"> <label for="password">Senha</label>
             <div class="row">
-              <div class="col-sm-6"> <input type="password" class="form-control underlined" name="password" id="password" placeholder="Enter password" ng-model="ctrl.register.password" ng-model-options="{ debounce: 100 }" required> </div>
-              <div class="col-sm-6"> <input type="password" class="form-control underlined" name="retype_password" id="retype_password" placeholder="Re-type password" ng-model="ctrl.register.retypepassword" ng-model-options="{ debounce: 100 }" required> </div>
+              <div class="col-sm-6"> <input type="password" class="form-control underlined" name="password" id="password" placeholder="Escreva a senha" ng-model="ctrl.register.password" ng-model-options="{ debounce: 100 }" required> </div>
+              <div class="col-sm-6"> <input type="password" class="form-control underlined" name="retype_password" id="retype_password" placeholder="Re-escreva a senha" ng-model="ctrl.register.retypepassword" ng-model-options="{ debounce: 100 }" required> </div>
             </div>
           </div>
           <div class="form-group"> <button type="submit" class="btn btn-block btn-primary" ng-click="ctrl.submitRegister(registerForm)">Registrar-se</button> </div>

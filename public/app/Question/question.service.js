@@ -30,7 +30,7 @@
 		function submitQuestion(form, tasks) {
 			return $http({
 				method: "POST",
-				url: "/questions",
+				url: "/questao/criar",
 				data: {
 					title: form.title,
 					creationScript: form.creation,
@@ -50,7 +50,7 @@
 		function getQuestionList(search, page) {
 			return $http({
 				method: "GET",
-				url: "/questionsPaginated",
+				url: "/questao/listar",
 				params: {
 					author: search.author,
 					title: search.title,
@@ -67,7 +67,7 @@
 		function getQuestion(qid) {
 			return $http({
 				method: "GET",
-				url: "/question/" + qid
+				url: "/questao/" + qid
 			});
 		};
 	};

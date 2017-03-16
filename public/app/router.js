@@ -23,7 +23,7 @@
 					requiredLogin : false
 				}
 			})
-			.when('/register', {
+			.when('/registrar', {
 				templateUrl: 'app/Login/_register.html',
 				controller: 'registerController',
 				controllerAs: 'ctrl',
@@ -31,7 +31,7 @@
 					requiredLogin : false
 				}
 			})
-			.when('/newQuestion', {
+			.when('/questao/criar', {
 				templateUrl: 'app/Question/_newQuestion.html',
 				controller: 'newQuestionController',
 				controllerAs: 'ctrl',
@@ -39,7 +39,7 @@
 					requiredLogin : true
 				}
 			})
-			.when('/questions', {
+			.when('/questao/listar', {
 				templateUrl: 'app/Question/_questionList.html',
 				controller: 'questionListController',
 				controllerAs: 'ctrl',
@@ -47,7 +47,7 @@
 					requiredLogin : true
 				}
 			})
-			.when('/question/:qid', {
+			.when('/questao/:qid', {
 				templateUrl: 'app/Question/_question.html',
 				controller: 'questionController',
 				controllerAs: 'ctrl',
@@ -55,7 +55,7 @@
 					requiredLogin : true
 				}
 			})
-			.when('/submissions', {
+			.when('/submissao', {
 				templateUrl: 'app/Submission/_submission.html',
 				controller: 'submissionController',
 				controllerAs: 'ctrl',
@@ -63,7 +63,7 @@
 					requiredLogin : true
 				}
 			})
-			.when('/users', {
+			.when('/usuario/listar', {
 				templateUrl: 'app/Users/_users.html',
 				controller: 'usersController',
 				controllerAs: 'ctrl',
@@ -71,7 +71,7 @@
 					requiredLogin : true
 				}
 			})
-			.when('/user/:uid', {
+			.when('/usuario/:uid', {
 				templateUrl: 'app/Users/_user.html',
 				controller: 'userController',
 				controllerAs: 'ctrl',

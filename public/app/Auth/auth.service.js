@@ -31,7 +31,7 @@
         function login(userParam) {
 			return $http({
 				method: "POST",
-				url: "login",
+				url: "/usuario/login",
 				data: userParam
 			});
         };
@@ -39,7 +39,7 @@
         function register(userParam) {
 			return $http({
 				method: "POST",
-				url: "register",
+				url: "/usuario/registrar",
 				data: userParam
 			});
         };

@@ -41,7 +41,7 @@
 
             questionService.submitQuestion(vm.form, vm.tasks).then(
                 (res) => {
-                    $location.url("/question/" + res.data.questionId);
+                    $location.url("/questao/" + res.data.questionId);
                 }
             );
 
