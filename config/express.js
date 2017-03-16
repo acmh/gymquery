@@ -16,15 +16,13 @@ module.exports = function() {
 
 	app.set('views', './api/views');
 	app.set('view engine', 'ejs');
-	app.set('MONITOR_ROLE', 0);
-	app.set('STUDENT_ROLE', 1);
 	app.use(flash());
 
 
-	require('../config/middleware.js')(app,['/profile','/questions','/question/*']);
+	require('../config/middleware.js')(app,['/usuario/listar','/questao/*']);
 	require('../api/routes/index.server.routes.js')(app);
 	require('../api/routes/users.server.routes.js')(app);
 	require('../api/routes/question.server.routes.js')(app);
-	
+
 	return app;
 };

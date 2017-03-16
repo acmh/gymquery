@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-block">
+                    <div class="card-title-block central">
+                        <h2>{{::ctrl.user.name}}</h2>
+                        <span ng-if="ctrl.user.role == 1" class="aluno-header"><i class="fa fa-user icon"></i> Aluno</span>
+                        <span ng-if="ctrl.user.role == 0" class="monitor-header"><i class="fa fa-user icon"></i> Monitor</span>
+                    </div>
+
+                    <!-- User Information -->
+                    <h5>
+                        <i class="fa fa-envelope icon icon-primary" title="Email"></i> {{::ctrl.user.email}} <br>
+                        <i class="fa fa-upload icon icon-primary" title="Contribuições"></i> {{::ctrl.user.contributions}}
+                    </h5>
+                    <hr>
+                    Tentativas : {{::ctrl.user.tried}} <br>
+                    Acertos : {{::ctrl.user.acc}} <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

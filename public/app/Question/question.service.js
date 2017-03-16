@@ -9,13 +9,9 @@
 
 	function questionServ ($http, authService) {
         var service;
-        var tasks = [{}];
 
         service = {
 			// Add Question Functions
-            getTasks: getTasks,
-            addTask : addTask,
-            removeTask : removeTask,
 			submitQuestion : submitQuestion,
 
 			// Question List Functions
@@ -31,28 +27,16 @@
 		// Add Question Functions  //
 		/////////////////////////////
 
-        function getTasks() {
-            return tasks;
-        };
-
-        function addTask() {
-            tasks.push({});
-        };
-
-        function removeTask() {
-            tasks.pop();
-        };
-
-		function submitQuestion(form) {
+		function submitQuestion(form, tasks, tags) {
 			return $http({
 				method: "POST",
-				url: "/questions",
+				url: "/questao/criar",
 				data: {
 					title: form.title,
 					creationScript: form.creation,
 					populateScript: form.population,
 					background: form.background,
-					tags: form.tags.split(" ").filter(((v, i, a) => a.indexOf(v) === i)),
+					tags: tags,
 					author: authService.getUser(),
 					taskList: tasks
 				}
@@ -66,7 +50,7 @@
 		function getQuestionList(search, page) {
 			return $http({
 				method: "GET",
-				url: "/questionsPaginated",
+				url: "/questao/listar",
 				params: {
 					author: search.author,
 					title: search.title,
@@ -83,7 +67,7 @@
 		function getQuestion(qid) {
 			return $http({
 				method: "GET",
-				url: "/question/" + qid
+				url: "/questao/" + qid
 			});
 		};
 	};

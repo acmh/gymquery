@@ -1,105 +1,139 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<base href="/">
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta charset="utf-8">
-		<title>GymQuery</title>
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>GymQuery</title>
 
-		<!-- Angular -->
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js" charset="utf-8"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js" charset="utf-8"></script>
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js" charset="utf-8"></script>
 
-		<!-- Bootstrap -->
- 		<!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">-->
+    <!-- Ace text editor -->
+    <script src="js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/ace/ui-ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/ace/mode-SQL.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/ace/theme-sqlserver.js" type="text/javascript" charset="utf-8"></script>
 
-		<link href="http://localhost:1337/css/main.css" rel="stylesheet"  type="text/css">
-		<link href="http://localhost:1337/css/bootstrap.min.css" rel="stylesheet"  type="text/css">
+    <!-- Bootstrap -->
+    <script src="js/ui-bootstrap-tpls-2.5.0.min.js" type="text/javascript"></script>
+    <script src="js/ng-tags-input.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/ng-tags-input.min.css">
+    <link rel="stylesheet" type="text/css" href="css/ng-tags-input.bootstrap.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet"  type="text/css">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" id="theme-style" href="css/app.css">
+    <link href="css/main.css" rel="stylesheet"  type="text/css">
 
-		<!-- Custom CSS -->
-		<link href="http://localhost:1337/css/sb-admin.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="js/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-		<!-- Custom Fonts -->
-		<link href="http://localhost:1337/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- App -->
+    <script src="app/app.js" charset="utf-8"></script>
+    <script src="app/router.js" charset="utf-8"></script>
 
+    <script src="app/Question/question.service.js" charset="utf-8"></script>
+    <script src="app/Auth/auth.service.js" charset="utf-8"></script>
+    <script src="app/Submission/submission.service.js" charset="utf-8"></script>
+    <script src="app/Users/users.service.js" charset="utf-8"></script>
 
+    <script src="app/Common/main.controller.js" charset="utf-8"></script>
+    <script src="app/Question/newQuestion.controller.js" charset="utf-8"></script>
+    <script src="app/Question/questionList.controller.js" charset="utf-8"></script>
+    <script src="app/Question/question.controller.js" charset="utf-8"></script>
+    <script src="app/Login/login.controller.js" charset="utf-8"></script>
+    <script src="app/Login/register.controller.js" charset="utf-8"></script>
+    <script src="app/Submission/submission.controller.js" charset="utf-8"></script>
+    <script src="app/Users/users.controller.js" charset="utf-8"></script>
+    <script src="app/Users/user.controller.js" charset="utf-8"></script>
+    <script src="app/Home/index.controller.js" charset="utf-8"></script>
+</head>
 
+<body ng-app="gymqueryApp" ng-controller="mainController as mainC">
+    <div class="main-wrapper">
+        <div class="app" id="app">
+            <header class="header">
+                <!-- Icone do projeto na navbar -->
+                <div class="header-block header-block-nav">
+                    <a href="#/">
+                        <div class="logo">
+                            <i class="fa fa-database"></i> GymQUERY
+                        </div>
+                    </a>
+                </div>
 
-		<!-- App -->
-		<script src="app/app.js" charset="utf-8"></script>
-		<script src="app/router.js" charset="utf-8"></script>
+                <!-- Opções do menu quando está logado -->
+                <div ng-show="user" class="header-block header-block-nav">
+                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                        <a class="btn btn-primary" href="#/">Dashboard</a>
+                        <div class="btn-group" role="group">
+                            <a id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Questões
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <a class="dropdown-item" href="#/questao/criar">Criar</a>
+                                <a class="dropdown-item" href="#/questao/listar">Listar</a>
+                            </div>
+                        </div>
+                        <a class="btn btn-primary" href="#/usuario/listar">Usuários</a>
+                    </div>
+                </div>
 
-		<script src="app/Question/question.service.js" charset="utf-8"></script>
-		<script src="app/Auth/auth.service.js" charset="utf-8"></script>
-		<script src="app/Submission/submission.service.js" charset="utf-8"></script>
-		<script src="app/Users/users.service.js" charset="utf-8"></script>
+                <!-- Parte de opções de perfil quando está logado, ou logar/registrar quando deslogado -->
+                <div class="header-block header-block-nav">
+                    <ul class="nav-profile">
+                        <li ng-if="user" class="profile dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="name">
+                                    {{user}}
+                                </span>
+                            </a>
+                            <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <a class="dropdown-item" href="#/"> <i class="fa fa-user icon"></i> Perfil </a>
+                                <a class="dropdown-item" href="#/"> <i class="fa fa-gear icon"></i> Configurações </a>
+                                <div class="dropdown-divider"></div>
+                                <a ng-click="mainC.logout()" class="dropdown-item" href="#/"> <i class="fa fa-power-off icon"></i> Logout </a>
+                            </div>
+                        </li>
+                        <li ng-if="!user">
+                            <a class="nav-link" href="#/login">
+                                <span>
+                                    Login
+                                </span>
+                            </a>
+                        </li>
+                        <li ng-if="!user">
+                            <a class="nav-link" href="#/registrar">
+                                <span>
+                                    Registrar
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <div class="green-line"></div>
+            <div class="container">
+                <div class="main-content" ng-view>
+            </div>
+            </div>
+        </div>
+        <div class="footer-custom">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="footer-block-custom pull-xs-right">
+                        made by <a href="#" class="btn btn-primary btn-sm">Jota</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-		<script src="app/Common/main.controller.js" charset="utf-8"></script>
-		<script src="app/Question/newQuestion.controller.js" charset="utf-8"></script>
-		<script src="app/Question/questionList.controller.js" charset="utf-8"></script>
-		<script src="app/Question/question.controller.js" charset="utf-8"></script>
-		<script src="app/Login/login.controller.js" charset="utf-8"></script>
-		<script src="app/Submission/submission.controller.js" charset="utf-8"></script>
-		<script src="app/Users/users.controller.js" charset="utf-8"></script>
-	</head>
-
-	<body ng-app="gymqueryApp" ng-controller="mainController as mainC">
-		<div id="wrapper">
-				<!-- Navbar -->
-				<nav class="navbar navbar-inverse navbar-fixed-top">
-				  <div class = "navbar-header">
-						<a class = "navbar-brand" href = "/#/">GymQuery</a>
-					</div>
-					<ul class="nav navbar-right top-nav">
-							<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
-									<ul class="dropdown-menu">
-											<li>
-													<a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-											</li>
-											<li>
-													<a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-											</li>
-											<li class="divider"></li>
-											<li>
-													<a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-											</li>
-									</ul>
-							</li>
-					</ul>
-					<div class="collapse navbar-collapse navbar-ex1-collapse">
-						<ul class="nav navbar-nav side-nav">
-							<!-- TODO: PUT IS ACTIVE IN LINKS -->
-							<li ng-show="!user"><a href="/#/login">Logar/Registrar</a></li>
-							<li ng-show="!user"><a style="cursor: pointer" ng-click="mainC.logout()">{{user}} - Logout</a></li>
-							<li ng-show="!user">
-								<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-database"></i> Questões <i class="fa fa-fw fa-caret-down"></i></a>
-								<ul id="demo" class="collapse">
-									<li ng-show="!user"><a href="/#/questions">Questões</a></li>
-									<li ng-show="!user"><a href="/#/newQuestion">Criar Questão</a></li>
-								</ul>
-							<li>
-
-							<li ng-show="!user"><a href="/#/submissions">Submissões</a></li>
-							<li ng-show="!user"><a href="/#/users">Usuários</a></li>
-						</ul>
-					</div>
-				</nav>
-
-				<div id="page-wrapper">
-					  <div class="container-fluid">
-							<div ng-view></div>
-						</div>
-				</div>
-		</div>
-
-		<!-- jQuery -->
-    <script src="http://localhost:1337/js/jquery.js"></script>
-			<script src="http://localhost:1337/js/common.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="http://localhost:1337/js/bootstrap.min.js"></script>
-
-	</body>
+<script src="js/vendor.js"></script>
+<script src="js/app.js"></script>
+</body>
 </html>

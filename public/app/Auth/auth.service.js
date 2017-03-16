@@ -19,6 +19,7 @@
 			logout: logout,
 			checkLogin: checkLogin,
 			successLogin: successLogin,
+			successRegister: successRegister,
 			getLogged: getLogged,
 			getUser: getUser,
 			getToken: getToken
@@ -31,7 +32,7 @@
         function login(userParam) {
 			return $http({
 				method: "POST",
-				url: "login",
+				url: "/usuario/login",
 				data: userParam
 			});
         };
@@ -39,7 +40,7 @@
         function register(userParam) {
 			return $http({
 				method: "POST",
-				url: "register",
+				url: "/usuario/registrar",
 				data: userParam
 			});
         };
@@ -72,8 +73,13 @@
 			$window.sessionStorage.token = res.data.token;
 
 			isLogged = true;
+			$http.defaults.headers.common['x-access-token'] = token;
 
 			$location.path("/");
+		};
+
+		function successRegister(res) {
+			$location.path("/login");
 		};
 
 		function getUser() {

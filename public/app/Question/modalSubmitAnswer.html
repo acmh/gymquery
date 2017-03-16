@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Confimar Submissão</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <div class="central">
+        <label class="control-label">Pergunta </label>
+        <div class="well">{{::modalCtrl.task}}</div>
+        <label class="control-label">Resposta </label>
+        <div class="ace-editor-style-sm" ui-ace="{
+            theme: 'sqlserver',
+            mode: 'sql',
+            onLoad: modalCtrl.readOnly
+        }" ng-model="modalCtrl.answer" ng-model-options="{ debounce: 200 }">
+        </div>
+    </div>
+    <br>
+    Confirma?
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="modalCtrl.cancel()"><i class="fa fa-close"></i> Cancelar</button>
+    <button class="btn btn-primary" type="button" ng-click="modalCtrl.ok()"><i class="fa fa-check"></i> Submeter</button>
+</div>

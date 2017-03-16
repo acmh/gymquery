@@ -1,1 +1,55 @@
-Usuários
+<div class="container items-list-page">
+    <!-- Title block -->
+    <div class="title-search-block">
+        <div class="title-block" style="padding-bottom: 25px;">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="title">
+                        Usuários
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="items-search">
+            <form class="form-inline">
+                <div class="input-group">
+                    <input type="text" class="form-control boxed rounded-s search-box" placeholder="Procurar por..."
+                    ng-model="ctrl.searchInput" ng-model-options="{ debounce: 250 }" ng-keyup="$event.keyCode == 13 && ctrl.search()">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary rounded-s" type="button" ng-click="ctrl.search()">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Card row -->
+    <div class="row central">
+        <div class="card user-card" ng-repeat="user in ctrl.users">
+            <div class="card-block" style="text-align: left">
+                <div class="card-title-block">
+                    <a ng-href="#/usuario/{{ ::user._id }}">
+                        <h3>{{user.name}}</h3>
+                    </a>
+                </div>
+                Tentativas:
+                {{ ::user.tried }}
+                <br>
+                Acertos:
+                {{ ::user.acc }}
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <!-- Button row -->
+    <div class="row">
+        <button type="button" class="btn btn-primary btn-lg btn-block" name="getMoreButton"
+            ng-show="ctrl.users.length !== ctrl.pageInfo.total && ctrl.enableGetMoreButton"
+            ng-click="ctrl.getMoreUsers()">Mais Usuários</button>
+    </div>
+</div>

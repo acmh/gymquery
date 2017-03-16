@@ -1,5 +1,5 @@
 (function() {
-    angular.module("gymqueryApp", ["ngRoute"]);
+    angular.module("gymqueryApp", ["ngRoute", "ngAnimate", "ngTagsInput", "ui.ace", "ui.bootstrap"]);
 
     angular
         .module("gymqueryApp")
@@ -20,7 +20,7 @@
             $rootScope.$on('$routeChangeSuccess', function(event, nextRoute, currentRoute) {
                 $rootScope.user = authService.getUser();
                 // if the user is already logged in, take him to the home page
-                if (authService.getLogged() && $location.path() == '/login') {
+                if (authService.getLogged() && ($location.path() == '/login' || $location.path() == '/registrar')) {
                     $location.path('/');
                 }
             });

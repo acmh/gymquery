@@ -1,11 +1,12 @@
-var User = require('mongoose').model('User'),
+ 	var User = require('mongoose').model('User'),
 	jwt = require('jsonwebtoken');
+var acl = require('../../api/middleware/permissions').acl;
 
 exports = module.exports = {};
 
 exports.login = function(req,res){
 	var _email = req.body.email;
-	User.findOne({email: _email}, function(err, user) {
+	User.findOne({email: _email}, "password salt name email role",  function(err, user) {
 		if(err){
 			res.status(404).json(err);
 			return;
@@ -26,6 +27,8 @@ exports.login = function(req,res){
 				});
 			}else{
 				var token = user.generateJwt();
+        acl.addUserRoles(token, 'user');
+
 				res.status(200);
 				res.json({
 				  	"token" : token,
@@ -40,12 +43,11 @@ exports.register = function(req, res){
 	var user = new User();
 	user.name = req.body.name;
 	user.email = req.body.email;
-	console.log(req.body);
 	user.setPassword(req.body.password);
 
 	user.save(function(err) {
+    console.log(err);
 		if(err){
-			console.log(err);
 			if(err.code == "11000"){
 				res.status(401);
 				res.json({
@@ -58,36 +60,10 @@ exports.register = function(req, res){
 				});
 			}
 		}else{
-			User.findOne({email: user.email}, function(err, user) {
-				if(err){
-					res.status(404).json(err);
-					return;
-				}
-
-				//If there is no user with this email
-				if(!user){
-					res.status(401).json({
-						success: false,
-						message: 'Authentication failed. User not found.'
-					});
-
-				}else if(user){
-					if(!user.validPassword(req.body.password)){
-						res.status(401).json({
-							success: false,
-							message: 'Authentication failed. Wrong password.'
-						});
-					}else{
-						token = user.generateJwt();
-						res.status(200);
-						res.json({
-						  	"token" : token,
-					   		"username" : user.name
-						});
-					}
-				}
-			});
-		}
+      res.status(200).json({
+        message: "Registered successfully"
+      });
+    }
 	});
 }
 
@@ -121,6 +97,85 @@ exports.topten = function(req, res){
 	})
 }
 
+exports.toptencontributors = function(req, res){
+	User
+	.find({role: 0})
+	.sort({"acc": -1})
+	.limit(10)
+	.exec(function(err, users){
+			if(err){
+				res.status(500).json({
+					sucess: false,
+					error: err.message
+				})
+			}else{
+				var data = [];
+
+				users.forEach(function(user){
+					data.push({
+						name: user.name,
+						rating: user.acc
+					})
+				})
+
+				res.status(200).json({
+					success: true,
+					data: data
+				})
+			}
+	})
+}
+
+exports.usersPaginated = function(req, res){
+	var query = {};
+	var options = {};
+
+	options.page = req.query.page;
+	options.limit = 10;
+
+	if(req.query.name){
+			query.name = { "$regex": req.query.name, "$options": "i" };
+	}
+
+	if(req.query.sort){
+			options.sort = {"name": req.query.sort};
+	}
+
+	User.paginate(query, options, function(err, result){
+			if(err){
+					res.status(500).json({
+							message: err.message
+					});
+			}else{
+					console.log(result);
+					res.status(200).json({
+							success:true,
+							users: result
+					});
+			}
+	});
+
+
+
+}
+
+exports.usersById = function(req, res){
+	var user_id = req.params.id;
+
+	User.findById(user_id, function(err, user){
+		if(err){
+			res.status(500).json({
+				success: false,
+				error: err.message
+			})
+		}else{
+			res.status(200).json({
+				success: true,
+				data: user
+			})
+		}
+	})
+}
 
 /*var getErrorMessage = function(err) {
 	var message = '';

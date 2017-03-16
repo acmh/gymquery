@@ -12,9 +12,8 @@
 
         /* Click Handlers */
         vm.submitLogin = submitLogin;
-        vm.submitRegister = submitRegister;
         vm.errorLogin = errorLogin;
-        vm.errorRegister = errorRegister;
+
 
         activate();
 

@@ -3,6 +3,7 @@ var config = require('./config'),
 
 module.exports = function() {
 	//mongoose.Promise = global.Promise;
+	mongoose.Promise = require('bluebird');
 	var db = mongoose.connect(config.db);
 
 	require('../api/models/user.server.model');
