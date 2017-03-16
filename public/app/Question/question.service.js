@@ -27,7 +27,7 @@
 		// Add Question Functions  //
 		/////////////////////////////
 
-		function submitQuestion(form, tasks) {
+		function submitQuestion(form, tasks, tags) {
 			return $http({
 				method: "POST",
 				url: "/questao/criar",
@@ -36,7 +36,7 @@
 					creationScript: form.creation,
 					populateScript: form.population,
 					background: form.background,
-					tags: form.tags,
+					tags: tags,
 					author: authService.getUser(),
 					taskList: tasks
 				}

@@ -39,7 +39,7 @@
                 tags.push(tag.text);
             }
 
-            questionService.submitQuestion(vm.form, vm.tasks).then(
+            questionService.submitQuestion(vm.form, vm.tasks, tags).then(
                 (res) => {
                     $location.url("/questao/" + res.data.questionId);
                 }
