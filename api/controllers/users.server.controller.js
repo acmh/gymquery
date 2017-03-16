@@ -1,5 +1,6 @@
  	var User = require('mongoose').model('User'),
 	jwt = require('jsonwebtoken');
+var acl = require('../../api/middleware/permissions').acl;
 
 exports = module.exports = {};
 
@@ -26,6 +27,8 @@ exports.login = function(req,res){
 				});
 			}else{
 				var token = user.generateJwt();
+        acl.addUserRoles(token, 'user');
+
 				res.status(200);
 				res.json({
 				  	"token" : token,
@@ -79,6 +82,7 @@ exports.register = function(req, res){
 						});
 					}else{
 						token = user.generateJwt();
+            acl.addUserRoles(token, 'user');
 						res.status(200);
 						res.json({
 						  	"token" : token,
