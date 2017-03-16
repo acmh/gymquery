@@ -43,12 +43,11 @@ exports.register = function(req, res){
 	var user = new User();
 	user.name = req.body.name;
 	user.email = req.body.email;
-	console.log(req.body);
 	user.setPassword(req.body.password);
 
 	user.save(function(err) {
+    console.log(err);
 		if(err){
-			console.log(err);
 			if(err.code == "11000"){
 				res.status(401);
 				res.json({
@@ -60,7 +59,11 @@ exports.register = function(req, res){
 					message: "Error ocurred: " + err
 				});
 			}
-		}
+		}else{
+      res.status(200).json({
+        message: "Registered successfully"
+      });
+    }
 	});
 }
 
