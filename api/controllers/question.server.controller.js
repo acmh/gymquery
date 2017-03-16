@@ -7,18 +7,19 @@ var async = require('async');
 exports = module.exports = {};
 
 exports.createQuestion = function(req, res, next) {
-
     var tables = {};
 
     var question = new Question({
         title: req.body.title,
         background: req.body.background,
-        creationScript: req.body.creation,
-        populateScript: req.body.populate,
+        creationScript: req.body.creationScript,
+        populateScript: req.body.populateScript,
         author: req.body.author,
-        taskList: req.body.taskList,
-        tags: req.body.tags
+        taskList: req.body.taskList
     });
+
+
+
 
     var query_creation = parser.parse(question.creationScript);
     var query_populate = parser.parse(question.populateScript);
@@ -66,7 +67,7 @@ exports.createQuestion = function(req, res, next) {
                       error: err.message
                     })
                   }else{
-                    
+
 
 
                     res.status(200).json({
