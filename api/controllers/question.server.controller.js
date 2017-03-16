@@ -74,7 +74,7 @@ exports.createQuestion = function(req, res, next) {
                 });
               }
           });
-      })
+      } )
     }else{
       res.status(500).json({
         success: false,
