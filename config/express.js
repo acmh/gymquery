@@ -19,7 +19,7 @@ module.exports = function() {
 	app.use(flash());
 
 
-	require('../config/middleware.js')(app,['/usuario/*','/questao/*']);
+	require('../config/middleware.js')(app,['/usuario/listar','/questao/*']);
 	require('../api/routes/index.server.routes.js')(app);
 	require('../api/routes/users.server.routes.js')(app);
 	require('../api/routes/question.server.routes.js')(app);

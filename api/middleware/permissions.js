@@ -39,7 +39,7 @@ function set_roles(acl) {
             allows: [
               //Perceba que register eh post, logo o guest nunca ira poder se registrar
               //mas se mudarmos para post ele conseguera
-              { resources: '/usuario/registrar', permissions: 'get'}
+              { resources: '/usuario/registrar', permissions: 'post'}
               //{ resources: '/home', permissions: 'get'}
             ]
         }
@@ -65,6 +65,7 @@ function maybePass(req, res, next){
 
     //Verifica no redis se aquele token, pode acessar aquela rota
     acl.isAllowed(usuarioId, req.route.path, req.method.toLowerCase(), function(err, allowed) {
+      console.log(allowed);
       if (allowed) {
         return next();
       }

@@ -60,37 +60,6 @@ exports.register = function(req, res){
 					message: "Error ocurred: " + err
 				});
 			}
-		}else{
-			User.findOne({email: user.email}, function(err, user) {
-				if(err){
-					res.status(404).json(err);
-					return;
-				}
-
-				//If there is no user with this email
-				if(!user){
-					res.status(401).json({
-						success: false,
-						message: 'Authentication failed. User not found.'
-					});
-
-				}else if(user){
-					if(!user.validPassword(req.body.password)){
-						res.status(401).json({
-							success: false,
-							message: 'Authentication failed. Wrong password.'
-						});
-					}else{
-						token = user.generateJwt();
-            acl.addUserRoles(token, 'user');
-						res.status(200);
-						res.json({
-						  	"token" : token,
-					   		"username" : user.name
-						});
-					}
-				}
-			});
 		}
 	});
 }

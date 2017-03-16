@@ -22,13 +22,15 @@ var UserSchema = new Schema({
 	contributions: {type: Number, default: 0}
 });
 
+
+
 UserSchema.methods.setPassword = function(password){
-  this.salt = crypto.randomBytes(16).toString('hex');
+	this.salt = crypto.randomBytes(16).toString('hex');
   this.password = crypto.pbkdf2Sync(password, this.salt, 1000, 64,'sha512').toString('hex');
 };
 
 UserSchema.methods.validPassword = function(password) {
-  var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+	var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
   return this.password === hash;
 };
 
@@ -45,15 +47,6 @@ UserSchema.methods.generateJwt = function() {
   }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 
-/* Execute before each user.save() call
-UserSchema.pre('save',
-	function(next) {
-		if (this.password) {
-			var md5 = crypto.createHash('md5');
-			this.password = md5.update(this.password).digest('hex');
-		}
 
-		next();
-	);*/
 UserSchema.plugin(mongoosePaginate);
 mongoose.model('User', UserSchema);

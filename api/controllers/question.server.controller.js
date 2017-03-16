@@ -66,6 +66,9 @@ exports.createQuestion = function(req, res, next) {
                       error: err.message
                     })
                   }else{
+                    
+
+
                     res.status(200).json({
                         success:true,
                         questionId: addedQuestion._id
