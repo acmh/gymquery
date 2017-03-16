@@ -30,11 +30,11 @@
                     vm.error = false;
                 });
             }
-            
+
             if (!registerForm.$valid) { return; }
 
             authService.register(vm.register).then(
-                authService.successLogin,
+                authService.successRegister,
                 vm.errorRegister
             );
 

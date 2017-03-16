@@ -19,6 +19,7 @@
 			logout: logout,
 			checkLogin: checkLogin,
 			successLogin: successLogin,
+			successRegister: successRegister,
 			getLogged: getLogged,
 			getUser: getUser,
 			getToken: getToken
@@ -75,6 +76,10 @@
 			$http.defaults.headers.common['x-access-token'] = token;
 
 			$location.path("/");
+		};
+
+		function successRegister(res) {
+			$location.path("/login");
 		};
 
 		function getUser() {
